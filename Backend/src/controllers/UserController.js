@@ -46,6 +46,11 @@ class UserController {
           ]
         })
       }
+
+      return res.status(500).json({
+        message: 'error interno',
+        errors: error.message
+      })
     }
   }
 }

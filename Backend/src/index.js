@@ -1,21 +1,22 @@
-const { app } = require("./app");
-require("dotenv").config();
-const ip = require("ip");
-const { connection } = require("./config/db");
+require('dotenv').config()
 
-async function main() {
-    try {
-        const conn = await connection.getConnection();
-        console.log('Conectado a la base de datos');
+const { app } = require('./app')
+const ip = require('ip')
+const { connection } = require('./config/db')
 
-        app.listen(process.env.PORT, () => {
-            console.log(`Servidor corriendo en http://${ip.address()}:${process.env.PORT}`);
-        });
+async function main () {
+  try {
+    const conn = await connection.getConnection()
+    console.log('Conectado a la base de datos')
 
-        conn.release();
-    } catch (err) {
-        console.error('Error cambiando a la base de datos:', err.stack);
-    }
+    app.listen(process.env.PORT, () => {
+      console.log(`Servidor corriendo en http://${ip.address()}:${process.env.PORT}`)
+    })
+
+    conn.release()
+  } catch (err) {
+    console.error('Error cambiando a la base de datos:', err.stack)
+  }
 }
 
-main();
+main()

@@ -4,27 +4,33 @@ import { persist, createJSONStorage } from "zustand/middleware";
 const useAuthStore = create(
   persist(
     (set) => ({
-      user: null,
       token: null,
+      expiresAt: null,
       isAuthenticated: false,
       login: (data) =>
         set({
-          user: data?.user,
-          token: data?.token,
+          token: data.token,
+          expiresAt: data.expiresAt,
           isAuthenticated: true,
         }),
       logout: () =>
         set({
-            user: null,
-            token: null,
-            isAuthenticated: false,
+          token: null,
+          expiresAt: null,
+          isAuthenticated: false,
         }),
+      isTokenValid: () => {
+        const state = useAuthStore.getState();
+        if (!state.token || !state.expiresAt) return false;
+        return new Date(state.expiresAt) > new Date();
+      },
     }),
     {
-      name: "user",
+      name: "auth",
       storage: createJSONStorage(() => sessionStorage),
-    },
-  ),
+    }
+  )
 );
 
 export default useAuthStore;
+

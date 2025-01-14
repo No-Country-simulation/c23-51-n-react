@@ -44,9 +44,12 @@ export const useLogin = () => {
         password: data.password,
       });
     },
-    onSuccess: (data) => {
-      login(data);
-      queryClient.setQueryData(["user"], data.data);
+    onSuccess: (response) => {
+      const { token, expires_in } = response.data;
+      const expiresAt = new Date(Date.now() + expires_in * 1000).toISOString();
+      login({ token, expiresAt });
+      queryClient.setQueryData(["user"], { token, expiresAt });
+
       toast.success("Bienvenido!");
       navigate("/");
     },

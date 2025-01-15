@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { useRegister } from "@/hooks/useFetch";
+import { useRegister } from "@/hooks/useUserAuth";
 import { useIsMutating } from "@tanstack/react-query";
 import {
   Form,

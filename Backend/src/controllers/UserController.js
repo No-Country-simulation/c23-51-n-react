@@ -42,7 +42,7 @@ class UserController {
     } catch (error) {
       console.log(error)
 
-      if (error.sqlState === '23000') {
+      if (error.code === 'ER_DUP_ENTRY') {
         return res.status(409).json({
           message: `El correo ${email} ya esta registrado`,
           errors: [

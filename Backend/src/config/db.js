@@ -1,21 +1,12 @@
-const mysql = require('mysql2');
-require("dotenv").config();
+const mysql = require('mysql2/promise')
 
-const connection = mysql.createConnection({
-  host: process.env.DB_HOST || 'localhost',
-  user: process.env.DB_USER || 'root',
-  password: '',
-  multipleStatements: true 
-});
+const connection = mysql.createPool({
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  database: process.env.DB_NAME,
+  password: process.env.DB_PASSWORD,
+  waitForConnections: true,
+  connectionLimit: 10
+})
 
-function createDatabase() {
-  connection.query(`CREATE DATABASE IF NOT EXISTS ${process.env.DB_NAME}`, (err, results) => {
-    if (err) {
-      console.error('Error creando la base de datos:', err.stack);
-      return;
-    }
-    console.log('Base de datos creada o ya existente');
-  });
-}
-
-module.exports = { connection, createDatabase };
+module.exports = { connection }

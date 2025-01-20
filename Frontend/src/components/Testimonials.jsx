@@ -9,7 +9,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { testimonials } from "@/constants";
 import { quote } from "@/assets";
 import Autoplay from "embla-carousel-autoplay";
-import { Separator } from "./ui/separator";
+import { Separator } from "@/components/ui/separator";
 
 const Testimonials = () => {
   return (

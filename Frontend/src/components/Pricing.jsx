@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import { useState } from "react";
-import { Button } from "./ui/button";
+import { Button } from "@/components/ui/button";
 import { plans } from "@/constants";
 import CountUp from "react-countup";
 import { CircleCheck } from "lucide-react";
@@ -18,7 +18,7 @@ const Pricing = () => {
             <div
               className={clsx(
                 "absolute left-1 h-[calc(100%-10px)] w-[calc(50%-4px)] overflow-hidden transition-transform duration-500",
-                "bg-[#CAFF33] rounded-full",
+                "bg-tangerine rounded-full",
                 !isMonthly && "translate-x-full",
               )}
             />
@@ -52,18 +52,18 @@ const Pricing = () => {
               className={clsx(
                 "flex flex-col gap-6 py-6 px-7 rounded-2xl w-full overflow-hidden",
                 "relative transition-all duration-300 hover:scale-105",
-                index === 2 ? "bg-[#CAFF33]" : "bg-[#0D0D0D]",
+                index === 2 ? "bg-tangerine" : "bg-[#0D0D0D]",
               )}
             >
               {index === 2 && (
-                <div className="h-[54px] absolute rotate-45 top-5 -right-14 bg-vividBlack text-[#CAFF33] text-center text-base font-semibold p-4 w-52">
+                <div className="h-[54px] absolute rotate-45 top-5 -right-14 bg-vividBlack text-tangerine text-center text-base font-semibold p-4 w-52">
                   Mejor oferta
                 </div>
               )}
               <h2
                 className={clsx(
                   "text-xl font-semibold",
-                  index === 2 ? "text-vividBlack" : "text-[#CAFF33]",
+                  index === 2 ? "text-vividBlack" : "text-tangerine",
                 )}
               >
                 {plan.title}
@@ -100,7 +100,7 @@ const Pricing = () => {
                   <li key={feature} className="flex items-start gap-3">
                     <CircleCheck
                       className="flex-shrink-0 w-5 h-5 mt-0.5"
-                      color={index === 2 ? "#1C1C1C" : "#CAFF33"}
+                      color={index === 2 ? "#1C1C1C" : "#FA7E25"}
                     />
                     <p className={clsx("text-sm", index === 2 ? "text-vividBlack" : "text-white")}>
                       {feature}
@@ -114,8 +114,8 @@ const Pricing = () => {
                   className={clsx(
                     "mt-auto w-full py-6 rounded-full font-semibold transition-all duration-300",
                     index === 2
-                      ? "bg-vividBlack text-[#CAFF33] hover:bg-[#2C2C2C]"
-                      : "bg-[#CAFF33] text-vividBlack hover:bg-[#CAFF33]/90",
+                      ? "bg-vividBlack text-tangerine hover:bg-[#2C2C2C]"
+                      : "bg-tangerine text-vividBlack hover:bg-tangerine/90",
                   )}
                 >
                   Regístrate

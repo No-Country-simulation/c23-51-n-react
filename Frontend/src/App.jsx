@@ -1,9 +1,9 @@
 import { Route, Routes } from "react-router";
-import Register from "./pages/Register";
-import Home from "./pages/Home";
-import Login from "./pages/Login";
+import Register from "@/pages/Register";
+import Home from "@/pages/Home";
+import Login from "@/pages/Login";
 import { ProtectedRoute } from "./components/ProtectedRoute";
-import Dashboard from "./pages/Dashboard";
+import Dashboard from "@/pages/Dashboard";
 
 function App() {
   return (
@@ -14,7 +14,7 @@ function App() {
         <Route path="/login" element={<Login />} />
 
         <Route element={<ProtectedRoute />}>
-        <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/dashboard" element={<Dashboard />} />
         </Route>
       </Routes>
     </>

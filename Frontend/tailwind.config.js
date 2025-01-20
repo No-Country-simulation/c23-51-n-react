@@ -15,6 +15,7 @@ export default {
         tomato: "#FF4E23",
         vividBlack: "#0D0D0D",
         coalGrey: "#1C1C1C",
+        silverGray: "#B3B3B3",
         cream: "#FFF9F6",
         foreground: "hsl(var(--foreground))",
         card: {

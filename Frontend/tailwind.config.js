@@ -49,7 +49,11 @@ export default {
   				'3': 'hsl(var(--chart-3))',
   				'4': 'hsl(var(--chart-4))',
   				'5': 'hsl(var(--chart-5))'
-  			}
+  			},
+			  limeGreen: "rgb(202, 255, 51)", // color personalizado
+			  limonGreen2: "rgb(184, 238, 36)",
+			  fondo:"rgb(25, 25, 25)",
+			  fondo2:"rgb(28, 28, 28)",
   		}
   	}
   },

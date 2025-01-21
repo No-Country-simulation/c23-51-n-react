@@ -1,17 +1,18 @@
-import { Button } from "@/components/ui/button";
-import { Link } from "react-router";
+import { ContactUs } from "@/components/ContactUs";
+import { Hero } from "@/components/Hero";
+import { Navbar } from "@/components/Navbar";
+import { Program } from "@/components/Program";
 
 const Home = () => {
   return (
-    <div className="flex flex-col items-center gap-4 p-8">
-      aqui ira la Langing page !
-      <Button asChild>
-        <Link to="/login">ir al login</Link>
-      </Button>
-      <Button asChild>
-        <Link to="/register">ir al registro</Link>
-      </Button>
-    </div>
+    <>
+       
+    <Navbar/>
+    <Hero/>
+    <Program/>
+    <ContactUs/>
+
+    </>
   );
 };
 

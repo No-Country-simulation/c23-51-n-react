@@ -61,8 +61,25 @@
     @apply border-border;
   }
   body {
-    @apply bg-vividBlack text-cream;
+    @apply bg-vividBlack text-cream font-lexend;
   }
 }
 
+.hero-background {
+  position: relative;
+}
 
+.hero-background::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url("./assets/asfalt-light.png");
+  background-size: auto;
+  background-position: center;
+  background-repeat: repeat;
+  opacity: 0.5;
+  mix-blend-mode: screen;
+}

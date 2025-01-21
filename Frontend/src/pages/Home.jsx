@@ -4,19 +4,24 @@ import { Navbar } from "@/components/Navbar";
 import { Program } from "@/components/Program";
 import Pricing from "@/components/Pricing";
 import Testimonials from "@/components/Testimonials";
+import CTA from "@/components/CTA";
+import Footer from "@/components/Footer";
 
 const Home = () => {
   return (
-    <div className="flex flex-col items-center gap-4">
-    <Navbar/>
-    <Hero/>
-    <Program/>
-    <ContactUs/>
+
+    <>
+    <Navbar />
+    <Hero />
+    <Program />
+    <ContactUs />
       <div className="w-full bg-coalGrey">
         <Pricing />
       </div>
       <Testimonials />
-    </div>
+      <CTA />
+      <Footer />
+    </>
   );
 };
 

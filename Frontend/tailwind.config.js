@@ -61,6 +61,10 @@ export default {
           5: "hsl(var(--chart-5))",
         },
       },
+      fontFamily: {
+        lexend: ["Lexend Variable", "sans-serif"],
+        abel: ["Abel", "sans-serif"],
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],

@@ -4,6 +4,8 @@ import Home from "@/pages/Home";
 import Login from "@/pages/Login";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
 import Dashboard from "@/pages/Dashboard";
+import "@fontsource/abel";
+import "@fontsource-variable/lexend";
 
 function App() {
   return (

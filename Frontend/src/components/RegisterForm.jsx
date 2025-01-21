@@ -32,7 +32,9 @@ const registrationSchema = z.object({
     .string()
     .min(2, { message: "El nombre debe tener al menos 2 caracteres" })
     .max(50, { message: "El nombre no debe exceder los 50 caracteres" })
-    .regex(/^[a-zA-Z\s]+$/, { message: "El nombre solo puede contener letras" }),
+    .regex(/^[\w\sáéíóúüñÁÉÍÓÚÜÑ'-]+$/, {
+      message: "El nombre solo puede contener letras, espacios y caracteres especiales válidos",
+    }),
   birthdate: z
     .string()
     .regex(/^\d{4}-\d{2}-\d{2}$/, { message: "La fecha debe tener el formato YYYY-MM-DD" }),

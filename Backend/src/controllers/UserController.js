@@ -35,13 +35,12 @@ class UserController {
 
       if (user) {
         return res.status(201).json({
+          status: 201,
           message: 'usuario creado correctamente',
           errors: []
         })
       }
     } catch (error) {
-      console.log(error)
-
       if (error.code === 'ER_DUP_ENTRY') {
         return res.status(409).json({
           message: `El correo ${email} ya esta registrado`,
@@ -79,15 +78,15 @@ class UserController {
       const user = await this.userModel.findByEmail(email)
 
       if (user && typeof user === 'object' && Object.entries(user).length === 0) {
-        return res.status(400).json({
+        return res.status(404).json({
           message: 'El correo no se encuentra registrado en el sistema',
           errors: []
         })
       }
 
-      if (user.status === 0) {
+      if (user && user.status === 0) {
         return res.status(400).json({
-          message: 'La cuenta se encuentra desactivada',
+          message: 'La cuenta vinculada a este correo esta desactivada',
           errors: []
         })
       }
@@ -100,8 +99,9 @@ class UserController {
         }
 
         const token = jwt.sign(payload, process.env.SECRET_KEY, { expiresIn: '1h' })
-        res.json({
-          message: 'Se inicio la sesión correctamente',
+
+        return res.json({
+          message: 'Sesion iniciada correctamente',
           data: {
             token,
             token_type: 'Bearer',
@@ -109,15 +109,14 @@ class UserController {
           }
         })
       } else {
-        return res.status(500).json({
+        return res.status(400).json({
           message: 'La contraseña es incorrecta',
           errors: []
         })
       }
     } catch (error) {
-      console.log(error)
       return res.status(500).json({
-        message: 'error interno',
+        message: 'error interno en el servidor',
         errors: error.message
       })
     }

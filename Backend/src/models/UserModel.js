@@ -1,3 +1,5 @@
+const logger = require('../utils/logger')
+
 class userModel {
   constructor (db) {
     this.db = db
@@ -22,7 +24,7 @@ class userModel {
 
       return +user.affectedRows
     } catch (error) {
-      console.log(error)
+      logger.error('Error intertno en el servidor: ', error)
       throw error
     }
   }
@@ -43,7 +45,7 @@ class userModel {
       if (!user) return {}
       return user
     } catch (error) {
-      console.log(error)
+      logger.error('Error intertno en el servidor: ', error)
       throw error
     }
   }

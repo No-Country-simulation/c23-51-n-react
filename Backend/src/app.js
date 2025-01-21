@@ -2,6 +2,9 @@ const express = require('express')
 const cors = require('cors')
 const morgan = require('morgan')
 const userRoute = require('./routes/UserRoute.js')
+const webHookRoute = require('./routes/WebhookRoute.js')
+const productRoute = require('./routes/ProductRoute.js')
+const planRoute = require('./routes/PlanRoute.js')
 const rateLimit = require('express-rate-limit')
 
 const userCreationLimiter = rateLimit({
@@ -19,12 +22,8 @@ app.use(morgan('dev'))
 app.set('trust proxy', 'loopback')
 
 app.use('/api', userCreationLimiter, userRoute)
-
-app.post('/api/paypal', async (req, res) => {
-  const event = req.body
-
-  console.log(event)
-  res.status(200).send('Webhook procesado correctamente')
-})
+app.use('/api', productRoute)
+app.use('/api', planRoute)
+app.use('/api', webHookRoute)
 
 module.exports = { app }

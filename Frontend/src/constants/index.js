@@ -1,3 +1,5 @@
+import { facebook, instagram, twitter } from "@/assets";
+
 export const plans = [
   {
     id: "0",
@@ -9,9 +11,7 @@ export const plans = [
       "Beneficio 1",
       "Beneficio 2",
       "Beneficio 3",
-      "Beneficio 4",
-      "Beneficio 5",
-      "Beneficio 6",
+ 
     ],
   },
   {
@@ -91,5 +91,49 @@ export const testimonials = [
     id: 6,
     text: "Si buscas una forma efectiva y flexible de entrenar, te recomiendo Momentum. ¡No te arrepentirás!",
     autor: "Miguel A.",
+  },
+];
+
+export const footerLinks = [
+  {
+    id: 0,
+    title: "Inicio",
+    url: "/",
+  },
+  {
+    id: 1,
+    title: "Planes",
+    url: "#planes",
+  },
+  {
+    id: 2,
+    title: "Rutinas",
+    url: "#rutinas",
+  },
+  {
+    id: 3,
+    title: "Comunidad",
+    url: "#",
+  },
+];
+
+export const socialsLinks = [
+  {
+    id: 0,
+    icon: twitter,
+    name: "Twitter",
+    url: "#",
+  },
+  {
+    id: 1,
+    icon: facebook,
+    name: "Facebook",
+    url: "#",
+  },
+  {
+    id: 2,
+    icon: instagram,
+    name: "Instagram",
+    url: "#",
   },
 ];

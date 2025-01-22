@@ -1,4 +1,60 @@
-import { facebook, instagram, twitter } from "@/assets";
+import { body, facebook, instagram, muscle, nutrition, run, twitter } from "@/assets";
+
+export const navLinks = [
+  {
+    id: 0,
+    title: "Inicio",
+    url: "/",
+  },
+  {
+    id: 1,
+    title: "Planes",
+    url: "#planes",
+  },
+  {
+    id: 2,
+    title: "Rutinas",
+    url: "#rutinas",
+  },
+  {
+    id: 3,
+    title: "Comunidad",
+    url: "#",
+  },
+];
+
+export const cards = [
+  {
+    image: muscle,
+    title: "Resistencia Física",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut venenatis, nunc a pretium viverra.",
+  },
+  {
+    image: run,
+    title: "Fuerza Cardio",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut venenatis, nunc a pretium viverra.",
+  },
+  {
+    image: body,
+    title: "Pérdida de Grasa",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut venenatis, nunc a pretium viverra.",
+  },
+  {
+    image: muscle,
+    title: "Ganancia muscular",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut venenatis, nunc a pretium viverra.",
+  },
+  {
+    image: nutrition,
+    title: "Nutrición",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut venenatis, nunc a pretium viverra.",
+  },
+];
 
 export const plans = [
   {
@@ -7,12 +63,7 @@ export const plans = [
     priceMonthly: 0,
     priceYearly: 0,
     caption: " ",
-    features: [
-      "Beneficio 1",
-      "Beneficio 2",
-      "Beneficio 3",
- 
-    ],
+    features: ["Beneficio 1", "Beneficio 2", "Beneficio 3"],
   },
   {
     id: "1",

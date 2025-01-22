@@ -10,13 +10,17 @@ export default {
         sm: "calc(var(--radius) - 4px)",
       },
       colors: {
-        background: "#0D0D0D",
         tangerine: "#FA7E25",
         tomato: "#FF4E23",
         vividBlack: "#0D0D0D",
         coalGrey: "#1C1C1C",
         silverGray: "#B3B3B3",
         cream: "#FFF9F6",
+        limeGreen: "rgb(202, 255, 51)", 
+			  limonGreen2: "rgb(184, 238, 36)",
+			  fondo:"rgb(25, 25, 25)",
+			  fondo2:"rgb(28, 28, 28)",
+        background: 'hsl(var(--background))',
         foreground: "hsl(var(--foreground))",
         card: {
           DEFAULT: "hsl(var(--card))",

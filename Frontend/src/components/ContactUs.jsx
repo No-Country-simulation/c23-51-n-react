@@ -1,72 +1,83 @@
-import { men, routine, woman } from "@/assets";
+import { abstractBottom, abstractTop, men, routine, woman } from "@/assets";
+import { CircleCheck } from "lucide-react";
+import { Link } from "react-router";
+import { Button } from "@/components/ui/button";
 
 export const ContactUs = () => {
   return (
-    <>
-      <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 py-8 mt-20">
-        {/* Sección de imágenes: mujer y hombre */}
-        <div className="flex justify-center items-center">
-          <img
-            className="w-full h-auto rounded-lg border border-limeBords mb-auto"
-            src={woman}
-            alt="Mujer haciendo ejercicio"
-          />
-        </div>
-        <div className="flex justify-center items-center">
-          <img
-            className="w-full h-auto rounded-lg border border-limeBords mb-auto"
-            src={men}
-            alt="Hombre haciendo ejercicio"
-          />
+    <div className="container relative px-8 md:px-24 py-12 md:py-[100px]">
+      <img
+        src={abstractTop}
+        alt="Abstract design top"
+        className="absolute top-0 left-0 w-1/4 max-w-[200px] -z-10"
+      />
+      <div className="grid grid-cols-1 gap-4 p-4 rounded-lg md:grid-cols-3">
+        <div className="overflow-hidden rounded-lg">
+          <img src={woman} alt="Mujer haciendo ejercicio" className="object-cover w-full h-full" />
         </div>
 
-        {/* Imagen de rutina  */}
-        <div className="flex justify-center items-center col-span-2 lg:col-span-1">
+        <div className="overflow-hidden rounded-lg">
+          <img src={men} alt="Hombre haciendo ejercicio" className="object-cover w-full h-full" />
+        </div>
+
+        <div className="overflow-hidden rounded-lg md:row-span-2">
           <img
-            className="w-full h-auto rounded-lg border border-limeBords"
             src={routine}
-            alt="Rutina de ejercicios"
+            alt="Mujer preparandose para levantar pesa"
+            className="object-cover w-full h-full"
           />
         </div>
 
-        {/* Contenedor del texto y los botones */}
-        <div className="col-span-1 md:col-span-2 lg:col-span-2 p-8 mt-4 font-semibold text-black rounded-lg bg-limeGreen w-[%] h-[90%] ">
-          <h2 className="text-2xl font-bold mb-4">
-            "Ponte en forma, fortalécete, y obtén los resultados que anhelas con nuestro plan de
-            fitness científicamente diseñado."
-          </h2>
-
-          <ul className="font-semibold space-y-2 mb-4">
-            <li className="flex items-center space-x-2">
-              <span className="flex items-center justify-center w-6 h-6 rounded-full bg-black text-white text-sm">
-                ✓
-              </span>{" "}
-              <span>Incrementa músculo y fuerza</span>
-            </li>
-            <li className="flex items-center space-x-2">
-              <span className="flex items-center justify-center w-6 h-6 rounded-full bg-black text-white text-sm">
-                ✓
-              </span>{" "}
-              <span>Siéntete más sano</span>
-            </li>
-            <li className="flex items-center space-x-2">
-              <span className="flex items-center justify-center w-6 h-6 rounded-full bg-black text-white text-sm">
-                ✓
-              </span>{" "}
-              <span>Entrena a tu ritmo</span>
-            </li>
-          </ul>
-
-          <div className="space-y-4 mt-4">
-            <button className="px-8 py-2 font-semibold border border-gray-800 text-black transition rounded-full bg-limeGreen hover:bg-fondo hover:text-limeGreen">
-              Quiero ser parte
-            </button>
-            <button className="px-8 py-2 font-semibold border border-gray-800 text-black transition rounded-full bg-limeGreen hover:bg-fondo hover:text-limeGreen">
-              Contáctanos
-            </button>
+        <div className="flex flex-col justify-between p-6 bg-orange-500 rounded-lg md:col-span-2">
+          <div>
+            <h2 className="mb-4 text-2xl font-bold text-black">
+              &quot;Ponte en forma, fortalécete, y obtén los resultados que anhelas con nuestro plan
+              de fitness científicamente diseñado.&quot;
+            </h2>
+            <ul className="mb-4 text-black">
+              <li className="flex items-center mb-2">
+                <CircleCheck className="flex-shrink-0 mr-2 size-5" color={"#1C1C1C"} />
+                Incrementa músculo y fuerza
+              </li>
+              <li className="flex items-center mb-2">
+                <CircleCheck className="flex-shrink-0 mr-2 size-5" color={"#1C1C1C"} />
+                Siéntete más sano
+              </li>
+              <li className="flex items-center">
+                <CircleCheck className="flex-shrink-0 mr-2 size-5" color={"#1C1C1C"} />
+                Entrena a tu ritmo
+              </li>
+            </ul>
+          </div>
+          <div className="flex space-x-4">
+            <Link to="/register">
+              <Button
+                variant="ghost"
+                className={
+                  "px-4 py-2 rounded-full font-semibold transition-all duration-300 bg-vividBlack hover:bg-[#2C2C2C] text-tangerine"
+                }
+              >
+                Quiero ser parte
+              </Button>
+            </Link>
+            <Link to={"mailto:momentum@fitness.com"}>
+              <Button
+                variant="ghost"
+                className={
+                  "px-4 py-2 rounded-full font-semibold transition-all duration-300 bg-transparent border border-vividBlack hover:bg-white hover:text-orange-500 hover:border-none text-vividBlack"
+                }
+              >
+                Contáctanos
+              </Button>
+            </Link>
           </div>
         </div>
       </div>
-    </>
+      <img
+        src={abstractBottom}
+        alt="Abstract design bottom"
+        className="absolute bottom-0 right-0 w-1/4 max-w-[200px] -z-10"
+      />
+    </div>
   );
 };

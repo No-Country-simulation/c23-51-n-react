@@ -5,6 +5,7 @@ const userRoute = require('./routes/UserRoute.js')
 const webHookRoute = require('./routes/WebhookRoute.js')
 const productRoute = require('./routes/ProductRoute.js')
 const planRoute = require('./routes/PlanRoute.js')
+const suscriptionRoute = require('./routes/SuscriptionRoute.js')
 const rateLimit = require('express-rate-limit')
 
 const userCreationLimiter = rateLimit({
@@ -24,6 +25,7 @@ app.set('trust proxy', 'loopback')
 app.use('/api', userCreationLimiter, userRoute)
 app.use('/api', productRoute)
 app.use('/api', planRoute)
+app.use('/api', suscriptionRoute)
 app.use('/api', webHookRoute)
 
 module.exports = { app }

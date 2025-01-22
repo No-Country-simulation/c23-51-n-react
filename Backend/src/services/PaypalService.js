@@ -141,6 +141,57 @@ class PaypalService {
       }
     }
   }
+
+  async createSuscription (suscription) {
+    try {
+      const { access_token: accessToken, token_type: tokenType } = await this.getAccessToken()
+
+      const response = await axios.post(`${this.#baseUrl}/${this.#version}/billing/subscriptions`,
+        suscription,
+        {
+          headers: {
+            Authorization: `${tokenType} ${accessToken}`
+          }
+        }
+      )
+
+      logger.info('Suscripcion de paypal creado correctamente')
+
+      return {
+        status: 201,
+        data: response.data,
+        message: 'Suscripcion de paypal creado correctamente'
+      }
+    } catch (error) {
+      if (error.response) {
+        // Error de respuesta HTTP
+        const { status, data: dataError } = error.response
+
+        logger.error(`Error ${status} en la solicitud a PayPal:`, dataError)
+        return {
+          status,
+          data: dataError.details || [],
+          message: dataError.message || 'Error al procesar la solicitud'
+        }
+      } else if (error.request) {
+        // No hubo respuesta del servidor
+        logger.error('No se recibió respuesta del servidor:', error.request)
+        return {
+          status: 500,
+          data: [],
+          message: 'No se pudo conectar con el servidor de PayPal'
+        }
+      } else {
+        // Error interno
+        logger.error('Error interno en el servidor:', error.message)
+        return {
+          status: 500,
+          data: [],
+          message: 'Error interno en el servidor'
+        }
+      }
+    }
+  }
 }
 
 module.exports = PaypalService

@@ -26,14 +26,22 @@ const validateCreateUser = [
     .withMessage('El nombre solo puede contener letras')
     .isLength({ min: 2, max: 50 })
     .withMessage('El nombre debe tener entre 2 y 50 caracteres')
-    .trim(), // Elimina espacios adicionales
-  body('birthdate')
-    .exists({ checkFalsy: true })
-    .withMessage('La fecha de cumpleaños es obligatoria')
-    .custom((value) => {
-      console.log(value)
+    .trim()
+]
 
-      // Verificar que cumple con el formato YYYY-MM-DD usando una expresión regular
+const validCreateUserProfile = [
+  body('last_name')
+    .exists({ checkFalsy: true })
+    .withMessage('El nombre es obligatorio')
+    .isAlpha('es-ES', { ignore: ' ' }) // Permite letras y espacios (en español)
+    .withMessage('El nombre solo puede contener letras')
+    .isLength({ min: 2, max: 50 })
+    .withMessage('El nombre debe tener entre 2 y 50 caracteres')
+    .trim(),
+  body('birth')
+    .exists({ checkFalsy: true })
+    .withMessage('La fecha de nacimiento es obligatoria')
+    .custom((value) => {
       const regex = /^\d{4}-\d{2}-\d{2}$/
       if (!regex.test(value)) {
         throw new Error('La fecha de cumpleaños debe tener el formato válido YYYY-MM-DD')
@@ -47,6 +55,8 @@ const validateCreateUser = [
       }
       return true
     }),
+  body('photo')
+    .optional(),
   body('height')
     .exists({ checkFalsy: true })
     .withMessage('La altura es obligatorio')
@@ -56,7 +66,23 @@ const validateCreateUser = [
     .exists({ checkFalsy: true })
     .withMessage('El peso es obligatorio')
     .isDecimal({ decimal_digits: '0,2', force_decimal: false })
-    .withMessage('El peso debe ser un numero válido de hasta 2 decimales en kg')
+    .withMessage('El peso debe ser un numero válido de hasta 2 decimales en kg'),
+  body('gender')
+    .notEmpty()
+    .withMessage('El campo género es obligatorio.')
+    .isString()
+    .withMessage('El género debe ser un texto.')
+    .isIn(['MASCULINO', 'FEMENINO'])
+    .withMessage("El género debe ser 'MASCULINO' o 'FEMENINO'.")
+    .trim(),
+  body('country')
+    .notEmpty()
+    .withMessage('El campo país es obligatorio.')
+    .isString()
+    .withMessage('El país debe ser un texto.')
+    .isLength({ min: 2 })
+    .withMessage('El nombre del país debe tener al menos 2 caracteres.')
+    .trim()
 ]
 
 const validateLoginUser = [
@@ -72,5 +98,6 @@ const validateLoginUser = [
 
 module.exports = {
   validateCreateUser,
+  validCreateUserProfile,
   validateLoginUser
 }

@@ -1,5 +1,4 @@
 const PaypalService = require('../services/PaypalService.js')
-const logger = require('../utils/logger.js')
 
 class SuscriptionController {
   constructor (suscriptionModel) {
@@ -31,7 +30,7 @@ class SuscriptionController {
           return res.status(400).json({
             status: 400,
             data: [],
-            message: 'producto no creado'
+            message: 'Suscripcion no fue creada'
           })
         }
       } else {

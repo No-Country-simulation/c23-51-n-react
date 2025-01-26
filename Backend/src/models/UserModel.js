@@ -11,6 +11,7 @@ class userModel {
       const [user] = await pool.query('INSERT INTO users SET email = ?, password = ?', [email, password])
       const userId = +user.insertId
 
+      const [[userData]] = await pool.query('SELECT id, email, plan_id FROM users WHERE id = ?', [userId])
       if (userId) {
         await pool.query(`INSERT INTO profiles 
           SET
@@ -20,7 +21,7 @@ class userModel {
       }
 
       return {
-        userId: +user.insertId,
+        data: userData,
         affectedRows: +user.affectedRows
       }
     } catch (error) {
@@ -29,7 +30,7 @@ class userModel {
     }
   }
 
-  async createProfileUser ({ user_id, last_name, birth, photo, height, weight, gender, country }) {
+  async createProfileUser ({ userId, lastName, birth, photo, height, weight, gender, country }) {
     try {
       const pool = this.db
       const [profile] = await pool.query(`UPDATE profiles 
@@ -45,9 +46,7 @@ class userModel {
         WHERE user_id = ?
         AND completed = 'FALSE'
         `
-      , [last_name, birth, photo, height, weight, gender, country, user_id])
-
-      console.log(profile)
+      , [lastName, birth, photo, height, weight, gender, country, userId])
 
       return +profile.affectedRows
     } catch (error) {
@@ -68,6 +67,9 @@ class userModel {
         FROM users 
         WHERE email = ?`,
       [email])
+
+      console.log(email)
+      console.log(user)
 
       if (!user) return {}
       return user

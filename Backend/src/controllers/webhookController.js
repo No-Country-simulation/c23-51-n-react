@@ -12,20 +12,25 @@ class webhookController {
       switch (event.event_type) {
         case 'BILLING.SUBSCRIPTION.ACTIVATED':
         {
-          const { id, status, start_time, plan_id, custom_id } = event.resource
+          const {
+            id, status,
+            start_time: startTime,
+            plan_id: planId,
+            custom_id: customId
+          } = event.resource
+
           const data = {
             id,
             status,
-            create_time: start_time,
-            plan_id,
-            custom_id
+            create_time: startTime,
+            plan_id: planId,
+            custom_id: customId
           }
           await this.suscriptionModel.createSuscription(data)
           return res.status(200).send('Webhook suscription processed successfully')
         }
 
         default:
-          console.log('nada')
           break
       }
     } catch (error) {

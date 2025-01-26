@@ -22,8 +22,6 @@ class AuthMiddleware {
       // Decodificar el token (esta parte sigue siendo síncrona)
       const decoded = jwt.verify(token, this.secretKey)
 
-      console.log(decoded)
-
       // Buscar al usuario en la base de datos
       const user = await this.userModel.findById(decoded.user_id)
       if (!user) {

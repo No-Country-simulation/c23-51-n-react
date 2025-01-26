@@ -96,8 +96,17 @@ const validateLoginUser = [
     .withMessage('La contraseña es obligatoria')
 ]
 
+const validRefreshTokenCompleteProfile = [
+  body('email')
+    .exists({ checkFalsy: true })
+    .withMessage('El correo es obligatorio')
+    .isEmail()
+    .withMessage('Debe proporcionar un correo válido')
+]
+
 module.exports = {
   validateCreateUser,
   validCreateUserProfile,
-  validateLoginUser
+  validateLoginUser,
+  validRefreshTokenCompleteProfile
 }

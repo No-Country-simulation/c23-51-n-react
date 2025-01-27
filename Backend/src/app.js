@@ -10,6 +10,7 @@ const webHookRoute = require('./routes/WebhookRoute.js')
 const productRoute = require('./routes/ProductRoute.js')
 const planRoute = require('./routes/PlanRoute.js')
 const filesRouter = require('./routes/files.router.js')
+const trainings  = require('./routes/trainings.router.js')
 
 const userCreationLimiter = rateLimit({
   windowMs: 1 * 60 * 1000, // Ventana de tiempo de 15 minutos
@@ -31,5 +32,6 @@ app.use('/api', productRoute)
 app.use('/api', planRoute)
 app.use('/api', webHookRoute)
 app.use('/api', filesRouter)
+app.use('/api', trainings)
 
 module.exports = { app }

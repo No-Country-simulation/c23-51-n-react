@@ -6,8 +6,21 @@ class FilesController {
     }
     async createFiles(req, res) {
         try {
-            console.log(prepareFiles(req.files))
-            console.log(req.files)
+            const fileArray = prepareFiles(req, req.files)
+            const resul = await this.filesModel.createFiles(fileArray)
+
+            if (!resul) {
+                return res.status(400).json({
+                    status: 400,
+                    message: 'No se pudieron subir los archivos'
+                })
+            }
+
+            return res.status(201).json({
+                status: 201,
+                data: resul,
+                message: 'Archivos subidos correctamente'
+            })
 
         } catch (error) {
             res.status(400).json({ error: error.message })

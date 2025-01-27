@@ -8,15 +8,12 @@ if (!fs.existsSync(uploadDir)) {
     fs.mkdirSync(uploadDir, { recursive: true });
 }
 
-const createUploadMiddleware = (fileType, maxSize, maxFiles) => {
-
-    console.log(fileType, maxSize, maxFiles)
+const createUploadMiddleware = (fileTypes, maxSize, maxFiles) => {
     // Configuración de multer
     const storage = multer.diskStorage({
         destination: function (req, file, cb) {
             cb(null, uploadDir);
         },
-
         filename: function (req, file, cb) {
             const extension = path.extname(file.originalname); // Extrae la extensión (.mp4, .avi, etc.)
             const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
@@ -26,8 +23,8 @@ const createUploadMiddleware = (fileType, maxSize, maxFiles) => {
 
     const fileFilter = (req, file, cb) => {
         // Verificar el tipo de archivo
-        if (file.mimetype !== fileType) {
-            return cb(new Error(`Solo se permiten archivos de tipo ${fileType}`), false);
+        if (!fileTypes.includes(file.mimetype)) {
+            return cb(new Error(`Solo se permiten archivos de tipo ${fileTypes.join(', ')}`), false);
         }
         cb(null, true);
     };

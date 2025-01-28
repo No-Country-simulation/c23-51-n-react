@@ -16,10 +16,10 @@ import RegisterSuscription from "./Steps/RegisterSuscription";
 import { useRegister } from "@/hooks/useUserAuth";
 
 const MultiStepForm = () => {
-    const [step, setStep] = useState(1)
-    const { formData, setFormData, resetForm } = useFormStore()
-    const navigate = useNavigate()
-    const { mutate: register, isLoading } = useRegister()
+  const [step, setStep] = useState(1);
+  const { formData, setFormData, resetForm } = useFormStore();
+  const navigate = useNavigate();
+  const { mutate: register, isLoading } = useRegister();
 
   const handleNext = (data) => {
     setFormData(data);
@@ -30,27 +30,22 @@ const MultiStepForm = () => {
     setStep((prev) => prev - 1);
   };
 
-
   const handleSubmit = async (credentials) => {
     try {
-      // Combinamos los datos del store con las credenciales
       const completeFormData = {
         ...formData,
         ...credentials,
-      }
+      };
 
-      console.log("Datos completos:", completeFormData)
+      //   console.log("Datos completos:", completeFormData)
 
-      // Intentamos registrar al usuario
-      await register(completeFormData)
+      register(completeFormData);
 
-      // Si el registro es exitoso, avanzamos al siguiente paso
-      setStep((prev) => prev + 1)
+      setStep((prev) => prev + 1);
     } catch (error) {
-      // El error ya se maneja en el hook useRegister
-      console.error("Error en el registro:", error)
+      console.error("Error en el registro:", error);
     }
-  }
+  };
 
   const handleComplete = () => {
     console.log("Formulario completado", formData);
@@ -89,8 +84,8 @@ const MultiStepForm = () => {
         return <LoadingStep onNext={handleComplete} />;
       case 9:
         return <FreeTrialGuideStep onNext={handleNext} />;
-        case 10: 
-        return <RegisterSuscription onNext={handleStartFreeTrial} />
+      case 10:
+        return <RegisterSuscription onNext={handleStartFreeTrial} />;
       default:
         return null;
     }

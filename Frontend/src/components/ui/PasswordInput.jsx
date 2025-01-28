@@ -1,12 +1,11 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
 import { FormControl, FormDescription, FormField, FormItem, FormMessage } from "./form";
-
-import { Eye, EyeOff } from "lucide-react";
 import { Button } from "./button";
 import { Input } from "./input";
+import { eye, hideEye } from "@/assets";
 
-const PasswordInput = ({ control, name, description, id,  }) => {
+const PasswordInput = ({ control, name, description, id }) => {
   const [showPassword, setShowPassword] = useState(false);
   const togglePasswordVisibility = () => setShowPassword(!showPassword);
 
@@ -18,11 +17,7 @@ const PasswordInput = ({ control, name, description, id,  }) => {
         <FormItem>
           <FormControl>
             <div className="relative">
-              <Input
-                id={id}
-                type={showPassword ? "text" : "password"}
-                {...field}
-              />
+              <Input id={id} type={showPassword ? "text" : "password"} {...field} />
               <Button
                 type="button"
                 variant="ghost"
@@ -31,9 +26,9 @@ const PasswordInput = ({ control, name, description, id,  }) => {
                 onClick={togglePasswordVisibility}
               >
                 {showPassword ? (
-                  <EyeOff className="size-5 text-cream" />
+                  <img src={eye} alt="Eye icon" className="size-5" />
                 ) : (
-                  <Eye className="size-5 text-cream" />
+                  <img src={hideEye} alt="Eye icon" className="size-5" />
                 )}
                 <span className="sr-only">
                   {showPassword ? "Ocultar contraseña" : "Mostrar contraseña"}
@@ -41,9 +36,7 @@ const PasswordInput = ({ control, name, description, id,  }) => {
               </Button>
             </div>
           </FormControl>
-          <FormDescription className="text-sm text-cream/80">
-            {description} 
-          </FormDescription>
+          <FormDescription className="text-sm text-cream/80">{description}</FormDescription>
           <FormMessage />
         </FormItem>
       )}

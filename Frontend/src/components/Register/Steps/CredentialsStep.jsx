@@ -17,7 +17,7 @@ import PasswordInput from "@/components/ui/PasswordInput";
 
 const accountSchema = z
   .object({
-    email: z.string().email("Correo electrónico inválido"),
+    email: z.string().email("Por favor, ingresa un correo electrónico válido."),
     password: z
       .string()
       .min(8, { message: "La contraseña debe tener al menos 8 caracteres" })
@@ -31,7 +31,7 @@ const accountSchema = z
     confirmPassword: z.string(),
   })
   .refine((data) => data.password === data.confirmPassword, {
-    message: "Las contraseñas no coinciden",
+    message: "Las contraseñas deben coincidir.",
     path: ["confirmPassword"],
   });
 
@@ -46,14 +46,13 @@ const CredentialsStep = ({ onNext, onBack }) => {
     mode: "onChange",
   });
 
-   const onSubmit = (data) => {
+  const onSubmit = (data) => {
     onNext({
       email: data.email,
       password: data.password,
-    })
+    });
     console.log("Data que se envia: " + data.email, data.password);
-
-  }
+  };
 
   return (
     <Register onBack={onBack}>
@@ -105,7 +104,7 @@ const CredentialsStep = ({ onNext, onBack }) => {
               className="text-base"
             />
 
-            <p className="text-[10px] text-center leading-4 font-normal [&_span]:underline [&_span]:underline-offset-2 px-8">
+            <p className="text-[10px] text-cream/60 text-center leading-4 font-normal [&_span]:cursor-pointer [&_span]:underline [&_span]:underline-offset-2 px-8">
               Al continuar, indicas que haz leído y aceptas nuestros{" "}
               <span>Términos y Condiciones</span>, <span>Política de Privacidad</span> y{" "}
               <span>Términos de Suscripción</span>

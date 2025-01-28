@@ -34,7 +34,7 @@ const LoadingStep = ({ onNext }) => {
         if (buttonRef.current) {
           buttonRef.current.click();
         }
-      }, 5000); 
+      }, 5000);
 
       return () => clearTimeout(timer);
     }
@@ -64,13 +64,7 @@ const LoadingStep = ({ onNext }) => {
         </div>
       </div>
       {!isLoading && (
-        <Button
-          ref={buttonRef}
-          type="button"
-          variant="outline"
-          className="w-full text-white bg-orange-500 hover:bg-orange-600"
-          onClick={handleContinue}
-        >
+        <Button ref={buttonRef} type="button" variant="outline" onClick={handleContinue}>
           Continuar
         </Button>
       )}

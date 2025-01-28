@@ -4,38 +4,35 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router";
 import { toast } from "sonner";
 
-export const useRegister = () => {  
+export const useRegister = () => {
   return useMutation({
     mutationFn: async (data) => {
       return await fetchData("auth/register", "POST", {
-        // Datos personales
-        email: data.email,
-        password: data.password,
-        name: data.name,
-        birthdate: data.birthdate,
-
-        // Datos del formulario multi-paso
         gender: data.gender,
         age: data.age,
         goals: data.goals,
         activityLevel: data.activityLevel,
-      })
+        name: data.name,
+        birthdate: data.birthdate,
+        email: data.email,
+        password: data.password,
+      });
     },
     onSuccess: () => {
-      toast.success("Cuenta creada exitosamente")
+      toast.success("Cuenta creada exitosamente");
     },
     onError: (error) => {
       if (error.message.includes("ya esta registrado")) {
-        toast.error(error.message)
+        toast.error(error.message);
       } else {
         toast.error("Error al crear la cuenta", {
           description: "Por favor, intenta nuevamente",
-        })
+        });
       }
-      throw error 
+      throw error;
     },
-  })
-}
+  });
+};
 
 export const useLogin = () => {
   const queryClient = useQueryClient();

@@ -18,7 +18,6 @@ const GenderStep = ({ onNext, onBack }) => {
         <Button
           variant="outline"
           onClick={() => onNext("masculino")}
-          className="relative w-full h-12 text-orange-500 border-orange-500 hover:bg-orange-500/10 hover:text-orange-400"
         >
           <img src={male} alt="Male gender icon" className="absolute left-6 size-6" />
           <span className="ml-4">MASCULINO</span>
@@ -26,7 +25,6 @@ const GenderStep = ({ onNext, onBack }) => {
         <Button
           variant="outline"
           onClick={() => onNext("femenino")}
-          className="relative w-full h-12 text-orange-500 border-orange-500 hover:bg-orange-500/10 hover:text-orange-400"
         >
           <img src={female} alt="Female gender icon" className="absolute left-6 size-6" />
           <span className="ml-4">FEMENINO</span>
@@ -34,7 +32,6 @@ const GenderStep = ({ onNext, onBack }) => {
         <Button
           variant="outline"
           onClick={() => onNext("otro")}
-          className="relative w-full h-12 text-orange-500 border-orange-500 hover:bg-orange-500/10 hover:text-orange-400"
         >
           <img src={bigender} alt="Other gender icon" className="absolute left-6 size-6" />
           <span className="ml-4">OTRO</span>

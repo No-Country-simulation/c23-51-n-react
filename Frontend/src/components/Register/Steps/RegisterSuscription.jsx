@@ -7,7 +7,7 @@ const RegisterSuscription = () => {
   const navigate = useNavigate();
 
   const handleClose = () => {
-    navigate("/home");
+    navigate("/dashboard");
   };
 
   const handleSubmit = () => {

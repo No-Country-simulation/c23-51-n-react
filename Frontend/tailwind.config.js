@@ -16,11 +16,7 @@ export default {
         coalGrey: "#1C1C1C",
         silverGray: "#B3B3B3",
         cream: "#FFF9F6",
-        limeGreen: "rgb(202, 255, 51)", 
-			  limonGreen2: "rgb(184, 238, 36)",
-			  fondo:"rgb(25, 25, 25)",
-			  fondo2:"rgb(28, 28, 28)",
-        background: 'hsl(var(--background))',
+        background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         card: {
           DEFAULT: "hsl(var(--card))",
@@ -64,6 +60,9 @@ export default {
       fontFamily: {
         lexend: ["Lexend Variable", "sans-serif"],
         abel: ["Abel", "sans-serif"],
+      },
+      transitionDuration: {
+        1500: "1500ms",
       },
     },
   },

@@ -1,28 +1,16 @@
-import { ContactUs } from "@/components/ContactUs";
-import { Hero } from "@/components/Hero";
-import { Navbar } from "@/components/Navbar";
-import { Program } from "@/components/Program";
-import Pricing from "@/components/Pricing";
-import Testimonials from "@/components/Testimonials";
-import CTA from "@/components/CTA";
-import Footer from "@/components/Footer";
+import { logo } from "@/assets";
+import HeroCarousel from "@/components/HeroCarousel";
 
 const Home = () => {
   return (
-    <>
-      <Navbar />
-      <Hero />
-      <div className="w-full bg-coalGrey">
-        <Program />
+    <main className="h-screen pt-4">
+      <div className="relative flex items-center justify-center pt-4">
+        <img src={logo} alt="Logo Momentum" className="z-10 object-contain" />
+        <div className="absolute inset-0">
+          <HeroCarousel />
+        </div>
       </div>
-      <ContactUs />
-      <div className="w-full bg-coalGrey">
-        <Pricing />
-      </div>
-      <Testimonials />
-      <CTA />
-      <Footer />
-    </>
+    </main>
   );
 };
 

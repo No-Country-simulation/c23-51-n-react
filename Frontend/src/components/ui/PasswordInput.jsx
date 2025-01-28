@@ -1,18 +1,12 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
-import {
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "./form";
+import { FormControl, FormDescription, FormField, FormItem, FormMessage } from "./form";
 
 import { Eye, EyeOff } from "lucide-react";
 import { Button } from "./button";
 import { Input } from "./input";
 
-const PasswordInput = ({ control, name, htmlFor, label, id, span }) => {
+const PasswordInput = ({ control, name, description, id,  }) => {
   const [showPassword, setShowPassword] = useState(false);
   const togglePasswordVisibility = () => setShowPassword(!showPassword);
 
@@ -22,28 +16,24 @@ const PasswordInput = ({ control, name, htmlFor, label, id, span }) => {
       name={name}
       render={({ field }) => (
         <FormItem>
-          <FormLabel htmlFor={htmlFor}>
-            {label} <span className="text-red-400 text-xs">{span}</span>
-          </FormLabel>
           <FormControl>
             <div className="relative">
               <Input
                 id={id}
                 type={showPassword ? "text" : "password"}
                 {...field}
-                 placeholder="********"
               />
               <Button
                 type="button"
                 variant="ghost"
                 size="sm"
-                className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
+                className="absolute top-0 right-0 h-full px-3 py-2 hover:bg-transparent"
                 onClick={togglePasswordVisibility}
               >
                 {showPassword ? (
-                  <EyeOff className="size-5 text-[#999999]" />
+                  <EyeOff className="size-5 text-cream" />
                 ) : (
-                  <Eye className="size-5 text-[#999999]" />
+                  <Eye className="size-5 text-cream" />
                 )}
                 <span className="sr-only">
                   {showPassword ? "Ocultar contraseña" : "Mostrar contraseña"}
@@ -51,6 +41,9 @@ const PasswordInput = ({ control, name, htmlFor, label, id, span }) => {
               </Button>
             </div>
           </FormControl>
+          <FormDescription className="text-sm text-cream/80">
+            {description} 
+          </FormDescription>
           <FormMessage />
         </FormItem>
       )}

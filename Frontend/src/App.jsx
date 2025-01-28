@@ -1,11 +1,11 @@
+import "@fontsource-variable/lexend";
 import { Route, Routes } from "react-router";
 import Register from "@/pages/Register";
 import Home from "@/pages/Home";
 import Login from "@/pages/Login";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
 import Dashboard from "@/pages/Dashboard";
-import "@fontsource/abel";
-import "@fontsource-variable/lexend";
+import Subscription from "./pages/Subscription";
 
 function App() {
   return (
@@ -17,6 +17,7 @@ function App() {
 
         <Route element={<ProtectedRoute />}>
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/subscription" element={<Subscription />} />
         </Route>
       </Routes>
     </>

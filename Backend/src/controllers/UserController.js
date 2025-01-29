@@ -78,7 +78,7 @@ class UserController {
   }
 
   async createProfileUser (req, res) {
-    const { last_name: lastName, birth, photo, height, weight, gender, country } = req.body
+    const { last_name: lastName, birth, photo, height, weight, gender, country, goals, activityLevel } = req.body
     const userId = req.user_id
 
     try {
@@ -101,7 +101,9 @@ class UserController {
         height,
         weight,
         gender,
-        country
+        country,
+        goals,
+        activityLevel
       })
 
       if (profileUser) {
@@ -152,7 +154,6 @@ class UserController {
       }
 
       const user = await this.userModel.findByEmail(email)
-      console.log(user)
 
       if (!user || Object.keys(user).length === 0) {
         return res.status(400).json({

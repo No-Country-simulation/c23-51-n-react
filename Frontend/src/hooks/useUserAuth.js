@@ -104,7 +104,7 @@ export const useLogin = () => {
       queryClient.setQueryData(["user"], { token, expiresAt });
 
       toast.success("Bienvenido!");
-      navigate("/dashboard");
+      navigate("/home");
     },
     onError: (error) => {
       if (error.message.includes("400")) {

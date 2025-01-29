@@ -35,7 +35,6 @@ const NameStep = ({ onNext, onBack }) => {
 
   const onSubmit = (data) => {
     onNext(data.name);
-    console.log("Data que se envia: " + data.name);
   };
   return (
     <Register onBack={onBack}>

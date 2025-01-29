@@ -40,7 +40,7 @@ const BirthdateStep = ({ onNext, onBack }) => {
 
   const [selectedValue, setSelectedValue] = useState({
     year: years[18], // minimo 18 años ? validar
-    month: "01",
+    month: "06",
     day: "01",
   });
 
@@ -53,7 +53,6 @@ const BirthdateStep = ({ onNext, onBack }) => {
   const onSubmit = () => {
     const formattedDate = `${selectedValue.year}-${selectedValue.month}-${selectedValue.day}`;
     onNext(formattedDate);
-    console.log("fecha que se envia: " + formattedDate);
   };
 
   const handlePickerChange = (newValue) => {

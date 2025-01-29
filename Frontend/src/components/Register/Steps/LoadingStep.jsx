@@ -3,7 +3,6 @@ import { useState, useEffect, useRef } from "react";
 import Register from "../Register";
 import { Button } from "@/components/ui/button";
 import { loader } from "@/assets";
-import { toast } from "sonner";
 
 const LoadingStep = ({ onNext }) => {
   const [percentage, setPercentage] = useState(0);
@@ -16,14 +15,11 @@ const LoadingStep = ({ onNext }) => {
         if (prevPercentage >= 100) {
           clearInterval(interval);
           setIsLoading(false);
-          toast.success("¡Plan creado con éxito!", {
-            description: "Tu plan personalizado está listo.",
-          });
           return 100;
         }
         return prevPercentage + 1;
       });
-    }, 25);
+    }, 30);
 
     return () => clearInterval(interval);
   }, []);
@@ -54,7 +50,7 @@ const LoadingStep = ({ onNext }) => {
           </p>
         </div>
         <div className="flex justify-center">
-          <img src={loader} alt="Loader icon" className="duration-1500 animate-spin" />
+          <img src={loader} alt="Loader icon" className={!isLoading ? "animate-none" : "duration-1500 animate-spin" } />
         </div>
         <div className="flex flex-col items-center justify-center text-cream/80">
           <span className="mb-2 text-2xl font-bold">{percentage}%</span>

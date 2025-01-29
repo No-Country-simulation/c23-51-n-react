@@ -17,50 +17,46 @@ import { useRegister } from "@/hooks/useUserAuth";
 
 const MultiStepForm = () => {
   const [step, setStep] = useState(1);
-  const { formData, setFormData, resetForm } = useFormStore();
+  const { setFormData, resetForm } = useFormStore();
+
   const navigate = useNavigate();
-  const { mutate: register, isLoading } = useRegister();
+  const { register } = useRegister();
 
   const handleNext = (data) => {
-    setFormData(data);
+    setFormData(data, step);
     setStep((prev) => prev + 1);
   };
 
   const handleBack = () => {
+    if (step === 1) {
+      return navigate("/");
+    };
     setStep((prev) => prev - 1);
   };
 
-  const handleSubmit = async (credentials) => {
+  const handleSubmit = async () => {
     try {
-      const completeFormData = {
-        ...formData,
-        ...credentials,
-      };
-
-      //   console.log("Datos completos:", completeFormData)
-
-      register(completeFormData);
-
+      await register(); 
       setStep((prev) => prev + 1);
+      resetForm();
     } catch (error) {
       console.error("Error en el registro:", error);
     }
   };
 
   const handleComplete = () => {
-    console.log("Formulario completado", formData);
     setStep((prev) => prev + 1);
   };
 
   const handleStartFreeTrial = () => {
-    navigate("/dashboard");
+    navigate("/subscription");
     resetForm();
   };
 
   const renderStep = () => {
     switch (step) {
       case 1:
-        return <GenderStep onNext={(gender) => handleNext({ gender })} />;
+        return <GenderStep onNext={(gender) => handleNext({ gender })} onBack={handleBack} />;
       case 2:
         return <AgeStep onNext={(age) => handleNext({ age })} onBack={handleBack} />;
       case 3:
@@ -79,11 +75,13 @@ const MultiStepForm = () => {
           <BirthdateStep onNext={(birthdate) => handleNext({ birthdate })} onBack={handleBack} />
         );
       case 7:
-        return <CredentialsStep onNext={handleSubmit} onBack={handleBack} />;
+        return (
+          <CredentialsStep onNext={handleNext} onBack={handleBack} onHandleSubmit={handleSubmit} />
+        );
       case 8:
         return <LoadingStep onNext={handleComplete} />;
       case 9:
-        return <FreeTrialGuideStep onNext={handleNext} />;
+        return <FreeTrialGuideStep onNext={handleComplete} />;
       case 10:
         return <RegisterSuscription onNext={handleStartFreeTrial} />;
       default:

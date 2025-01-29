@@ -8,7 +8,7 @@ const FreeTrialGuideStep = ({ onNext }) => {
   const navigate = useNavigate();
 
   const handleClose = () => {
-    navigate("/dashboard");
+    navigate("/home");
   };
   return (
     <Register showBackButton={false} showCloseButton={true} onClose={handleClose}>

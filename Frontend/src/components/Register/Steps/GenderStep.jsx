@@ -17,21 +17,21 @@ const GenderStep = ({ onNext, onBack }) => {
       <div className="w-full space-y-4">
         <Button
           variant="outline"
-          onClick={() => onNext("masculino")}
+          onClick={() => onNext("MASCULINO")}
         >
           <img src={male} alt="Male gender icon" className="absolute left-6 size-6" />
           <span className="ml-4">MASCULINO</span>
         </Button>
         <Button
           variant="outline"
-          onClick={() => onNext("femenino")}
+          onClick={() => onNext("FEMENINO")}
         >
           <img src={female} alt="Female gender icon" className="absolute left-6 size-6" />
           <span className="ml-4">FEMENINO</span>
         </Button>
         <Button
           variant="outline"
-          onClick={() => onNext("otro")}
+          onClick={() => onNext("OTRO")}
         >
           <img src={bigender} alt="Other gender icon" className="absolute left-6 size-6" />
           <span className="ml-4">OTRO</span>
@@ -43,7 +43,7 @@ const GenderStep = ({ onNext, onBack }) => {
 
 GenderStep.propTypes = {
   onNext: PropTypes.func.isRequired,
-  onBack: PropTypes.func,
+  onBack: PropTypes.func.isRequired,
 };
 
 export default GenderStep;

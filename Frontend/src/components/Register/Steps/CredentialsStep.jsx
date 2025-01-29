@@ -35,7 +35,7 @@ const accountSchema = z
     path: ["confirmPassword"],
   });
 
-const CredentialsStep = ({ onNext, onBack }) => {
+const CredentialsStep = ({ onNext, onBack, onHandleSubmit }) => {
   const form = useForm({
     resolver: zodResolver(accountSchema),
     defaultValues: {
@@ -47,11 +47,8 @@ const CredentialsStep = ({ onNext, onBack }) => {
   });
 
   const onSubmit = (data) => {
-    onNext({
-      email: data.email,
-      password: data.password,
-    });
-    console.log("Data que se envia: " + data.email, data.password);
+    onNext(data);
+    onHandleSubmit(); 
   };
 
   return (
@@ -128,6 +125,7 @@ const CredentialsStep = ({ onNext, onBack }) => {
 CredentialsStep.propTypes = {
   onNext: PropTypes.func.isRequired,
   onBack: PropTypes.func.isRequired,
+  onHandleSubmit: PropTypes.func,
 };
 
 export default CredentialsStep;

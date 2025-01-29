@@ -1,17 +1,14 @@
+import PropTypes from "prop-types";
 import { registerMan, securityLock } from "@/assets";
 import { Button } from "@/components/ui/button";
 import { X } from "lucide-react";
 import { useNavigate } from "react-router";
 
-const RegisterSuscription = () => {
+const RegisterSuscription = ({onNext}) => {
   const navigate = useNavigate();
 
   const handleClose = () => {
-    navigate("/dashboard");
-  };
-
-  const handleSubmit = () => {
-    navigate("/subscription");
+    navigate("/home");
   };
 
   return (
@@ -40,13 +37,17 @@ const RegisterSuscription = () => {
           </div>
         </div>
         <div className="px-4">
-          <Button type="button" onClick={handleSubmit}>
+          <Button type="button" onClick={onNext}>
             EMPIEZA MI SEMANA GRATIS
           </Button>
         </div>
       </div>
     </div>
   );
+};
+
+RegisterSuscription.propTypes = {
+  onNext: PropTypes.func.isRequired,
 };
 
 export default RegisterSuscription;

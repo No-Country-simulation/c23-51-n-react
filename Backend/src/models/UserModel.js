@@ -30,9 +30,11 @@ class userModel {
     }
   }
 
-  async createProfileUser ({ userId, lastName, birth, photo, height, weight, gender, country }) {
+  async createProfileUser ({ userId, lastName, birth, photo, height, weight, gender, country, goals, activityLevel }) {
     try {
       const pool = this.db
+      const goalsString = JSON.stringify(goals)
+
       const [profile] = await pool.query(`UPDATE profiles 
         SET 
           last_name = ?,
@@ -42,11 +44,13 @@ class userModel {
           weight = ?,
           gender = ?,
           country = ?,
-          completed = 'TRUE'
+          completed = 'TRUE',
+          goals = ?,
+          activityLevel = ?
         WHERE user_id = ?
         AND completed = 'FALSE'
         `
-      , [lastName, birth, photo, height, weight, gender, country, userId])
+      , [lastName, birth, photo, height, weight, gender, country, goalsString, activityLevel, userId])
 
       return +profile.affectedRows
     } catch (error) {
@@ -67,9 +71,6 @@ class userModel {
         FROM users 
         WHERE email = ?`,
       [email])
-
-      console.log(email)
-      console.log(user)
 
       if (!user) return {}
       return user

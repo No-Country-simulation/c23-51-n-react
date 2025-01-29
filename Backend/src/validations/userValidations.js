@@ -82,7 +82,17 @@ const validCreateUserProfile = [
     .withMessage('El país debe ser un texto.')
     .isLength({ min: 2 })
     .withMessage('El nombre del país debe tener al menos 2 caracteres.')
-    .trim()
+    .trim(),
+  body('goals')
+    .exists({ checkFalsy: true })
+    .withMessage('Las metas son obligatorias')
+    .isArray()
+    .withMessage('El campo metas debe ser un array'),
+  body('activityLevel')
+    .notEmpty()
+    .withMessage('El nivel de actividad es obligatorio.')
+    .isString()
+    .withMessage('El nivel de actividad debe ser un texto.')
 ]
 
 const validateLoginUser = [

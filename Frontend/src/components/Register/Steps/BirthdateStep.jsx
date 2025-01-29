@@ -41,7 +41,7 @@ const BirthdateStep = ({ onNext, onBack }) => {
   const [selectedValue, setSelectedValue] = useState({
     year: years[18], // minimo 18 años ? validar
     month: "06",
-    day: "01",
+    day: "10",
   });
 
   const form = useForm({
@@ -83,10 +83,10 @@ const BirthdateStep = ({ onNext, onBack }) => {
               itemHeight={40}
               wheelMode="natural"
             >
-              <Picker.Column name="year" className="text-center">
-                {years.map((year) => (
-                  <Picker.Item key={year} value={year}>
-                    {year}
+              <Picker.Column name="day" className="text-center">
+                {days.map((day) => (
+                  <Picker.Item key={day} value={day}>
+                    {day}
                   </Picker.Item>
                 ))}
               </Picker.Column>
@@ -97,10 +97,10 @@ const BirthdateStep = ({ onNext, onBack }) => {
                   </Picker.Item>
                 ))}
               </Picker.Column>
-              <Picker.Column name="day" className="text-center">
-                {days.map((day) => (
-                  <Picker.Item key={day} value={day}>
-                    {day}
+              <Picker.Column name="year" className="text-center">
+                {years.map((year) => (
+                  <Picker.Item key={year} value={year}>
+                    {year}
                   </Picker.Item>
                 ))}
               </Picker.Column>
@@ -109,12 +109,7 @@ const BirthdateStep = ({ onNext, onBack }) => {
           {form.formState.errors.year && (
             <p className="text-sm text-red-500">{form.formState.errors.year.message}</p>
           )}
-          <Button
-            type="submit"
-            variant="outline"
-            className="w-full text-white bg-orange-500 hover:bg-orange-600"
-            disabled={!form.formState.isValid}
-          >
+          <Button type="submit" variant="outline" disabled={!form.formState.isValid}>
             Siguiente
           </Button>
         </form>

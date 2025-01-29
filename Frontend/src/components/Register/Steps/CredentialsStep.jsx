@@ -20,14 +20,13 @@ const accountSchema = z
     email: z.string().email("Por favor, ingresa un correo electrónico válido."),
     password: z
       .string()
-      .min(8, { message: "La contraseña debe tener al menos 8 caracteres" })
+      .min(8, {
+        message:
+          "La contraseña debe tener al menos 8 caracteres, 1 letra mayúscula y 1 número",
+      })
       .max(50, { message: "La contraseña no debe exceder los 50 caracteres" })
-      .regex(/[a-z]/, { message: "La contraseña debe contener al menos una letra minúscula" })
       .regex(/[A-Z]/, { message: "La contraseña debe contener al menos una letra mayúscula" })
-      .regex(/[0-9]/, { message: "La contraseña debe contener al menos un número" })
-      .regex(/[@$!%*?&]/, {
-        message: "La contraseña debe contener al menos un carácter especial (@, $, !, %, *, ?, &)",
-      }),
+      .regex(/[0-9]/, { message: "La contraseña debe contener al menos un número" }),
     confirmPassword: z.string(),
   })
   .refine((data) => data.password === data.confirmPassword, {
@@ -48,7 +47,7 @@ const CredentialsStep = ({ onNext, onBack, onHandleSubmit }) => {
 
   const onSubmit = (data) => {
     onNext(data);
-    onHandleSubmit(); 
+    onHandleSubmit();
   };
 
   return (
@@ -59,7 +58,7 @@ const CredentialsStep = ({ onNext, onBack, onHandleSubmit }) => {
       </div>
 
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col pt-5 space-y-24">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col pt-5 space-y-[50%]">
           <div className="flex flex-col gap-8">
             <FormField
               control={form.control}
@@ -71,6 +70,7 @@ const CredentialsStep = ({ onNext, onBack, onHandleSubmit }) => {
                       id="email"
                       {...field}
                       autoComplete="email"
+                      placeholder="ejemplo@gmail.com"
                       type="email"
                       className="text-base"
                     />

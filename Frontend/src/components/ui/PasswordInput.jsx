@@ -17,7 +17,12 @@ const PasswordInput = ({ control, name, description, id }) => {
         <FormItem>
           <FormControl>
             <div className="relative">
-              <Input id={id} type={showPassword ? "text" : "password"} {...field} />
+              <Input
+                id={id}
+                type={showPassword ? "text" : "password"}
+                {...field}
+                placeholder="********"
+              />
               <Button
                 type="button"
                 variant="ghost"

@@ -46,7 +46,7 @@ const NameStep = ({ onNext, onBack }) => {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="flex flex-col justify-between space-y-[70%]"
+          className="flex flex-col justify-between space-y-[90%]"
         >
           <FormField
             control={form.control}
@@ -58,6 +58,7 @@ const NameStep = ({ onNext, onBack }) => {
                     id="name"
                     {...field}
                     autoComplete="name"
+                    placeholder="Tu nombre"
                     type="text"
                     className="text-3xl text-center"
                   />

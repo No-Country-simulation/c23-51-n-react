@@ -6,10 +6,18 @@ class FilesController {
     }
     async createFiles(req, res) {
         try {
-            const fileArray = prepareFiles(req, req.files)
-            const resul = await this.filesModel.createFiles(fileArray)
+            if (!req.files || req.files.length === 0) {
+                return res.status(400).json({
+                    status: 400,
+                    message: 'No se encontraron archivos para subir'
+                });
+            }
 
-            if (!resul) {
+            const fileArray = prepareFiles(req, req.files)
+
+            const files = await this.filesModel.bulkInsert(fileArray)
+
+            if (!files) {
                 return res.status(400).json({
                     status: 400,
                     message: 'No se pudieron subir los archivos'
@@ -18,12 +26,15 @@ class FilesController {
 
             return res.status(201).json({
                 status: 201,
-                data: resul,
+                data: files,
                 message: 'Archivos subidos correctamente'
             })
 
         } catch (error) {
-            res.status(400).json({ error: error.message })
+            console.log(error)
+            res.status(400).json({
+                error: error.message,
+            })
         }
     }
 }

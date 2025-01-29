@@ -5,13 +5,20 @@ class FilesModel {
     this.db = db;
   }
 
-  async createFiles(files) {
+  async bulkInsert(files) {
     try {
       const pool = this.db;
-      const values = files.map(file => [file.training_id, file.name, file.url, file.status]);
+
+      const values = files.map(file => [
+        file.training_id,
+        file.name,
+        file.url,
+        1, // status por defecto
+        new Date() // uploaded_at
+      ]);
 
       const [result] = await pool.query(
-        `INSERT INTO videos (training_id, name, url, status) VALUES ?`,
+        `INSERT INTO videos (training_id, name, url, status, created_at) VALUES ?`,
         [values]
       );
 

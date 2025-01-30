@@ -16,19 +16,30 @@ const birthdateSchema = z
   })
   .refine(
     (data) => {
-      const date = new Date(
+      const enteredDate = new Date(
         Number.parseInt(data.year),
         Number.parseInt(data.month) - 1,
         Number.parseInt(data.day),
       );
+      const currentDate = new Date();
+      let age = currentDate.getFullYear() - enteredDate.getFullYear();
+      if (
+        currentDate.getMonth() < enteredDate.getMonth() ||
+        (currentDate.getMonth() === enteredDate.getMonth() &&
+          currentDate.getDate() < enteredDate.getDate())
+      ) {
+        age--;
+      }
       return (
-        date.getFullYear() === Number.parseInt(data.year) &&
-        date.getMonth() === Number.parseInt(data.month) - 1 &&
-        date.getDate() === Number.parseInt(data.day)
+        enteredDate.getFullYear() === Number.parseInt(data.year) &&
+        enteredDate.getMonth() === Number.parseInt(data.month) - 1 &&
+        enteredDate.getDate() === Number.parseInt(data.day) &&
+        enteredDate <= currentDate &&
+        age >= 18
       );
     },
     {
-      message: "Fecha inválida",
+      message: "Debes tener mínimo 18 años para registrarte",
     },
   );
 
@@ -106,9 +117,7 @@ const BirthdateStep = ({ onNext, onBack }) => {
               </Picker.Column>
             </Picker>
           </div>
-          {form.formState.errors.year && (
-            <p className="text-sm text-red-500">{form.formState.errors.year.message}</p>
-          )}
+
           <Button type="submit" variant="outline" disabled={!form.formState.isValid}>
             Siguiente
           </Button>

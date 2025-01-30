@@ -1,11 +1,10 @@
 import PropTypes from "prop-types";
 import Register from "../Register";
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { Form } from "@/components/ui/form";
+import { Form, FormField, FormItem, FormControl, FormMessage } from "@/components/ui/form";
 import Picker from "react-mobile-picker";
 
 const birthdateSchema = z
@@ -35,11 +34,12 @@ const birthdateSchema = z
         enteredDate.getMonth() === Number.parseInt(data.month) - 1 &&
         enteredDate.getDate() === Number.parseInt(data.day) &&
         enteredDate <= currentDate &&
-        age >= 18
+        age >= 17
       );
     },
     {
-      message: "Debes tener mínimo 18 años para registrarte",
+      message:
+        "Debes tener mínimo 18 años para registrarte. El botón 'Siguiente' está deshabilitado.",
     },
   );
 
@@ -49,28 +49,19 @@ const BirthdateStep = ({ onNext, onBack }) => {
   const months = Array.from({ length: 12 }, (_, i) => (i + 1).toString().padStart(2, "0"));
   const days = Array.from({ length: 31 }, (_, i) => (i + 1).toString().padStart(2, "0"));
 
-  const [selectedValue, setSelectedValue] = useState({
-    year: years[18], // minimo 18 años ? validar
-    month: "06",
-    day: "10",
-  });
-
   const form = useForm({
     resolver: zodResolver(birthdateSchema),
-    defaultValues: selectedValue,
+    defaultValues: {
+      year: years[18],
+      month: "06",
+      day: "10",
+    },
     mode: "onChange",
   });
 
-  const onSubmit = () => {
-    const formattedDate = `${selectedValue.year}-${selectedValue.month}-${selectedValue.day}`;
+  const onSubmit = (data) => {
+    const formattedDate = `${data.year}-${data.month}-${data.day}`;
     onNext(formattedDate);
-  };
-
-  const handlePickerChange = (newValue) => {
-    setSelectedValue(newValue);
-    form.setValue("year", newValue.year);
-    form.setValue("month", newValue.month);
-    form.setValue("day", newValue.day);
   };
 
   return (
@@ -87,40 +78,70 @@ const BirthdateStep = ({ onNext, onBack }) => {
           className="flex flex-col justify-between space-y-[70%]"
         >
           <div className="w-full">
-            <Picker
-              value={selectedValue}
-              onChange={handlePickerChange}
-              height={150}
-              itemHeight={40}
-              wheelMode="natural"
-            >
-              <Picker.Column name="day" className="text-center">
-                {days.map((day) => (
-                  <Picker.Item key={day} value={day}>
-                    {day}
-                  </Picker.Item>
-                ))}
-              </Picker.Column>
-              <Picker.Column name="month" className="text-center">
-                {months.map((month) => (
-                  <Picker.Item key={month} value={month}>
-                    {month}
-                  </Picker.Item>
-                ))}
-              </Picker.Column>
-              <Picker.Column name="year" className="text-center">
-                {years.map((year) => (
-                  <Picker.Item key={year} value={year}>
-                    {year}
-                  </Picker.Item>
-                ))}
-              </Picker.Column>
-            </Picker>
+            <Controller
+              name="day"
+              control={form.control}
+              render={({ field }) => (
+                <FormField
+                  control={form.control}
+                  name="day"
+                  render={() => (
+                    <FormItem>
+                      <FormControl>
+                        <Picker
+                          value={form.watch()}
+                          onChange={(newValue) => {
+                            field.onChange(newValue.day);
+                            form.setValue("month", newValue.month);
+                            form.setValue("year", newValue.year);
+                            form.trigger();
+                          }}
+                          height={150}
+                          itemHeight={40}
+                          wheelMode="natural"
+                        >
+                          <Picker.Column name="day" className="text-center">
+                            {days.map((day) => (
+                              <Picker.Item key={day} value={day}>
+                                {day}
+                              </Picker.Item>
+                            ))}
+                          </Picker.Column>
+                          <Picker.Column name="month" className="text-center">
+                            {months.map((month) => (
+                              <Picker.Item key={month} value={month}>
+                                {month}
+                              </Picker.Item>
+                            ))}
+                          </Picker.Column>
+                          <Picker.Column name="year" className="text-center">
+                            {years.map((year) => (
+                              <Picker.Item key={year} value={year}>
+                                {year}
+                              </Picker.Item>
+                            ))}
+                          </Picker.Column>
+                        </Picker>
+                      </FormControl>
+                      {!form.formState.isValid && (
+                        <p className="mt-2 text-sm text-red-500">
+                          {form.formState.errors.day?.message ||
+                            "Debes tener mínimo 18 años para registrarte"}
+                        </p>
+                      )}
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              )}
+            />
           </div>
 
-          <Button type="submit" variant="outline" disabled={!form.formState.isValid}>
-            Siguiente
-          </Button>
+          <div>
+            <Button type="submit" variant="outline" disabled={!form.formState.isValid}>
+              Siguiente
+            </Button>
+          </div>
         </form>
       </Form>
     </Register>

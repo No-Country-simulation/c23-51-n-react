@@ -38,8 +38,7 @@ const birthdateSchema = z
       );
     },
     {
-      message:
-        "Debes tener mínimo 18 años para registrarte. El botón 'Siguiente' está deshabilitado.",
+      message: "Debes tener mínimo 18 años para registrarte.",
     },
   );
 
@@ -125,8 +124,7 @@ const BirthdateStep = ({ onNext, onBack }) => {
                       </FormControl>
                       {!form.formState.isValid && (
                         <p className="mt-2 text-sm text-red-500">
-                          {form.formState.errors.day?.message ||
-                            "Debes tener mínimo 18 años para registrarte"}
+                          {form.formState.errors.day?.message}
                         </p>
                       )}
                       <FormMessage />

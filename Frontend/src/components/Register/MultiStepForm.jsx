@@ -34,15 +34,15 @@ const MultiStepForm = () => {
     setStep((prev) => prev - 1);
   };
 
-  const handleSubmit = async () => {
+   const handleSubmit = async (data) => {
     try {
-      await register(); 
-      setStep((prev) => prev + 1);
-      resetForm();
+      await register(data) 
+      setStep((prev) => prev + 1)
     } catch (error) {
-      console.error("Error en el registro:", error);
+      console.error("Error en el registro:", error)
+      throw error 
     }
-  };
+  }
 
   const handleComplete = () => {
     setStep((prev) => prev + 1);

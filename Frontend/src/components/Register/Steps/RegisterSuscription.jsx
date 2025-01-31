@@ -27,7 +27,7 @@ const RegisterSuscription = ({onNext}) => {
         <div className="flex flex-col items-center space-y-2 justify-normal">
           <div className="flex items-center justify-between gap-x-14">
             <span className="text-sm line-through text-cream/80 ">$2.00/mes</span>
-            <span className="text-sm font-bold text-tangerine">25% DESCUENTO</span>
+            <span className="text-sm font-bold text-tomato">25% DESCUENTO</span>
           </div>
           <p className="font-bold text-center">7 días GRATIS, entonces $0.05/día</p>
           <span className="text-base leading-5 text-cream/80">Solo $1.49 al mes</span>

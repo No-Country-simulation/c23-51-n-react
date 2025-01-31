@@ -12,7 +12,7 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "rounded-2xl bg-tangerine text-base font-bold leading-5 text-white shadow hover:bg-tangerine/90 uppercase",
+          "rounded-2xl bg-tangerine text-base font-bold leading-5 text-white shadow hover:bg-[#D25F0C] uppercase shadow-btn",
         outline:
           "rounded-lg border border-tangerine text-base font-bold bg-transparent shadow-sm hover:bg-tangerine/20 text-tangerine uppercase",
         link: "text-cream text-base font-normal leading-5 underline-offset-8 hover:underline decoration-tangerine",

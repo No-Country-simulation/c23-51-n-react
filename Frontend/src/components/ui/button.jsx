@@ -16,13 +16,13 @@ const buttonVariants = cva(
         outline:
           "rounded-lg border border-tangerine text-base font-bold bg-transparent shadow-sm hover:bg-tangerine/20 text-tangerine uppercase",
         link: "text-cream text-base font-normal leading-5 underline-offset-8 hover:underline decoration-tangerine",
-        ghost: "",
+        playBtn: "rounded-full bg-transparent shadow-btn [&_svg]:size-24 p-0",
       },
       size: {
         default: "h-12 px-4 py-3.5 w-full",
         sm: "h-8 rounded-md px-3 text-xs",
         lg: "h-10 rounded-md px-8",
-        icon: "h-9 w-9",
+        icon: "size-20",
       },
     },
     defaultVariants: {

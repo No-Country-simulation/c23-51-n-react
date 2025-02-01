@@ -6,6 +6,7 @@ import Login from "@/pages/Login";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
 import Home from "@/pages/Home";
 import Subscription from "./pages/Subscription";
+import Layout from "./components/common/Layout";
 
 function App() {
   return (
@@ -19,9 +20,11 @@ function App() {
         </Route>
 
         {/* Rutas protegidas */}
-        <Route element={<ProtectedRoute />}>
-          <Route path="/home" element={<Home />} />
-          <Route path="/subscription" element={<Subscription />} />
+        <Route element={<Layout />}>
+          <Route element={<ProtectedRoute />}>
+            <Route path="/home" element={<Home />} />
+            <Route path="/subscription" element={<Subscription />} />
+          </Route>
         </Route>
       </Routes>
     </>

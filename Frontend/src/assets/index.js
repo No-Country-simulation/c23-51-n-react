@@ -17,7 +17,7 @@ import dayStar from "./icons/icon_day_star.png";
 import todayUnlock from "./icons/icon_today_unlock.png";
 import securityLock from "./icons/security-lock.svg";
 import close from "./icons/icon_exit.svg";
-import EmptyCheckbox from "./icons/EmptyCheckbox";
+import EmptyCheckbox from "./icons/emptyCheckbox";
 import FillCheckbox from "./icons/fillCheckbox";
 import IconFilter from "./icons/iconFilter";
 import HeartOutline from "./icons/iconHeartOutline";

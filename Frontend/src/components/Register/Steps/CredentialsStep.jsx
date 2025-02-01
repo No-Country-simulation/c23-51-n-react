@@ -107,6 +107,12 @@ const CredentialsStep = ({ onNext, onBack, onHandleSubmit, isLoading, isError })
               className="text-base"
             />
 
+            {isError && (
+              <p className="text-xs font-normal leading-4 text-center text-destructive">
+                Hubo un error en el registro. Por favor, intenta de nuevo.
+              </p>
+            )}
+            
             <p className="text-[10px] text-cream/60 text-center leading-4 font-normal [&_span]:cursor-pointer [&_span]:underline [&_span]:underline-offset-2 px-8">
               Al continuar, indicas que haz leído y aceptas nuestros{" "}
               <span>Términos y Condiciones</span>, <span>Política de Privacidad</span> y{" "}
@@ -122,11 +128,6 @@ const CredentialsStep = ({ onNext, onBack, onHandleSubmit, isLoading, isError })
           >
             {isMutating > 0 ? "Creando cuenta..." : "Crear cuenta"}
           </Button>
-          {isError && (
-            <p className="text-[10px] text-cream/60 text-center leading-4 font-normal">
-              Hubo un error en el registro. Por favor, intenta de nuevo.
-            </p>
-          )}
         </form>
       </Form>
     </Register>

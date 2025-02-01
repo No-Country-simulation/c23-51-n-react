@@ -11,14 +11,17 @@ class userModel {
       const [user] = await pool.query('INSERT INTO users SET email = ?, password = ?', [email, password])
       const userId = +user.insertId
 
+      if (!user.insertId) {
+        throw new Error('No se inserto el usuario')
+      }
+
       const [[userData]] = await pool.query('SELECT id, email, plan_id FROM users WHERE id = ?', [userId])
-      if (userId) {
-        await pool.query(`INSERT INTO profiles 
+
+      await pool.query(`INSERT INTO profiles 
           SET
             user_id = ?,
             name = ?`,
-        [userId, name])
-      }
+      [userId, name])
 
       return {
         data: userData,

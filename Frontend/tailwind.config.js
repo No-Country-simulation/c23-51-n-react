@@ -13,7 +13,7 @@ export default {
         tangerine: "#FA7E25",
         tomato: "#FF4E23",
         vividBlack: "#0D0D0D",
-        coalGrey: "#1C1C1C",
+        coalGrey: "#373737",
         silverGray: "#B3B3B3",
         cream: "#FFF9F6",
         background: "hsl(var(--background))",

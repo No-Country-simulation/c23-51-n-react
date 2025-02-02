@@ -52,7 +52,7 @@ const HeroCarousel = () => {
 
               <div className="flex flex-col w-full gap-1 px-4 ">
                 <Link to="/register">
-                  <Button>¡Entrena ahora!</Button>
+                  <Button>{slide.button}</Button>
                 </Link>
                 <Link to="/login">
                   <Button variant="link">Ya tengo una cuenta</Button>

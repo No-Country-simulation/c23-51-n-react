@@ -28,10 +28,38 @@ import dayStar from "./icons/icon_day_star.png";
 import todayUnlock from "./icons/icon_today_unlock.png";
 import securityLock from "./icons/security-lock.svg";
 import close from "./icons/icon_exit.svg";
+import EmptyCheckbox from "./icons/emptyCheckbox";
+import FillCheckbox from "./icons/fillCheckbox";
+import IconFilter from "./icons/iconFilter";
+import HeartOutline from "./icons/iconHeartOutline";
+import Heart from "./icons/iconHeart";
+import HomeIcon from "./icons/HomeIcon";
+import MenuIcon from "./icons/MenuIcon";
+import MuscleIcon from "./icons/MuscleIcon";
+import PauseIcon from "./icons/iconPause";
+import RepeatIcon from "./icons/RepeatIcon";
+import ThunderIcon from "./icons/iconThunder";
+import TimeIcon from "./icons/iconTime";
+import TipIcon from "./icons/TipIcon";
+import VideoIcon from "./icons/VideoIcon";
 
 import loader from "./Loader-anim.png";
 
 export {
+  EmptyCheckbox,
+  FillCheckbox,
+  IconFilter,
+  HeartOutline,
+  Heart,
+  HomeIcon,
+  MenuIcon,
+  MuscleIcon,
+  PauseIcon,
+  RepeatIcon,
+  ThunderIcon,
+  TimeIcon,
+  TipIcon,
+  VideoIcon,
   inicio_boy,
   inicio_girl,
   inicio_man,

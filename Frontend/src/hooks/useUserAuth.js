@@ -5,84 +5,54 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router";
 import { toast } from "sonner";
 
+
 export const useRegister = () => {
   const login = useAuthStore((state) => state.login);
+  const formData = useFormStore((state) => state.formData);
 
-  // 1. crear el usuario
-  const createUserMutation = useMutation({
-    mutationFn: async (data) => {
-      return await fetchData("auth/register", "POST", {
-        email: data.email,
-        password: data.password,
-        name: data.name,
+  const registerMutation = useMutation({
+    mutationFn: async () => {
+      const response = await fetchData("auth/register", "POST", {
+        email: formData.email,
+        password: formData.password,
+        name: formData.name,
+        last_name: "Apellido",
+        gender: formData.gender,
+        goals: formData.goals,
+        activityLevel: formData.activityLevel,
+        birth: formData.birthdate,
+        height: "0.00",
+        weight: "0.00",
+        country: "País",
       });
-    },
-    onError: (error) => {
-      toast.error("Error al crear la cuenta", {
-        description: error.message || "Por favor, intenta nuevamente",
-      });
-      throw error;
-    },
-  });
+      
+      if (response.success && response.data && response.data.token) {
+        const expiresAt = new Date(Date.now() + 60 * 60 * 1000).toISOString();
 
-  // 2. completar el perfil del usuario
-  const completeProfileMutation = useMutation({
-    mutationFn: async ({ data, token }) => {
-      return await fetchData(
-        "auth/complete-profile",
-        "POST",
-        {
-          last_name: "apellido",
-          gender: data.gender,
-          goals: data.goals,
-          activityLevel: data.activityLevel,
-          birth: data.birthdate,
-          height: "0.00",
-          weight: "0.00",
-          country: "País",
-        },
-        token,
-      );
-    },
-    onSuccess: () => {
-      toast.success("Perfil completado correctamente");
-    },
-    onError: (error) => {
-      toast.error("Error al completar el perfil", {
-        description: error.message || "Por favor, intenta nuevamente",
-      });
-      throw error;
-    },
-  });
-
-  // 3. registro completo
-  const register = async () => {
-    try {
-      const { userData, profileData } = useFormStore.getState();
-      const completeFormData = { ...userData, ...profileData };
-
-      const userResponse = await createUserMutation.mutateAsync(completeFormData);
-      const { token, expiresAt } = userResponse.data;
-
-      if (!token) {
-        throw new Error("No se recibió un token válido después de crear el usuario");
+        return {
+          token: response.data.token,
+          expiresAt: expiresAt
+        };
+      } else {
+        throw new Error("No se recibió un token válido del servidor");
       }
-
-      await completeProfileMutation.mutateAsync({ data: completeFormData, token });
-
-      // Autenticar al usuario usando el store
-      login({ token, expiresAt });
-    } catch (error) {
-      console.error("Error en el registro:", error);
-      toast.error("Error en el proceso de registro", {
-        description: "Por favor, intenta nuevamente",
+    },
+    onSuccess: (authData) => {
+      toast.success("Registro completado correctamente");
+      login(authData); // Llama a la función login con el token y la fecha de expiración
+    },
+    onError: (error) => {
+      toast.error("Error en el registro", {
+        description: error.message || "Por favor, intenta nuevamente",
       });
-    }
-  };
+    },
+  });
 
   return {
-    register,
-    isLoading: createUserMutation.isLoading || completeProfileMutation.isLoading,
+    register: () => registerMutation.mutateAsync(),
+    isLoading: registerMutation.isLoading,
+    isError: registerMutation.isError,
+    isSuccess: registerMutation.isSuccess,
   };
 };
 

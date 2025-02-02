@@ -42,6 +42,7 @@ import ThunderIcon from "./icons/iconThunder";
 import TimeIcon from "./icons/iconTime";
 import TipIcon from "./icons/TipIcon";
 import VideoIcon from "./icons/VideoIcon";
+import videoPage from "./video/Plancha.mp4"
 
 import loader from "./Loader-anim.png";
 
@@ -86,4 +87,6 @@ export {
     routine3,
     routine4,
     routine5,
+    //video
+    videoPage
 };

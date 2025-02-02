@@ -5,15 +5,15 @@ class ExerciseModel {
     this.db = db
   }
 
-  async createExercise ({ name, description, repetition, duration, difficulty }) {
+  async createExercise ({ name, description, benefit, advice, repetition, duration, difficulty, video_id: videoId }) {
     const pool = this.db
 
     try {
       const query = `
-        INSERT INTO exercises (name, description, repetition, duration, difficulty)
-        VALUES (?, ?, ?, ?, ?)
+        INSERT INTO exercises (name, description, benefit, advice, repetition, duration, difficulty, video_id)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
       `
-      const values = [name, description, repetition, duration, difficulty]
+      const values = [name, description, benefit, advice, repetition, duration, difficulty, videoId]
 
       const [result] = await pool.query(query, values)
 

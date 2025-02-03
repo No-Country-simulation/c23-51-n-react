@@ -20,7 +20,7 @@ const Rutinas = () => {
       <section className="mt-4 space-y-4">
         {categorias.map((categoria, index) => (
           <Link
-            to={`/rutinas/${categoria.nombre.toLowerCase().replace(/ /g, "-")}`}
+            to={`/routines/${categoria.nombre.toLowerCase().replace(/ /g, "-")}`}
             key={index}
             className="relative block overflow-hidden rounded-lg"
           >

@@ -28,7 +28,7 @@ function App() {
             <Route path="/home" element={<Home />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/routines" element={<Rutinas />} />
-            <Route path="/rutinas/:categoria" element={<WorkoutComponent />} />
+            <Route path="/routines/:categoria" element={<WorkoutComponent />} />
             <Route path="/subscription" element={<Subscription />} />
           </Route>
         </Route>

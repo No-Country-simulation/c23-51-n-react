@@ -4,7 +4,6 @@ const morgan = require('morgan')
 const rateLimit = require('express-rate-limit')
 const path = require('path')
 
-
 const userRoute = require('./routes/UserRoute.js')
 const webHookRoute = require('./routes/WebhookRoute.js')
 const productRoute = require('./routes/ProductRoute.js')
@@ -12,7 +11,8 @@ const planRoute = require('./routes/PlanRoute.js')
 const exerciseRoute = require('./routes/ExerciseRoute.js')
 const exerciseRoutineRoute = require('./routes/RoutineRoute.js')
 const suscriptionRoute = require('./routes/SuscriptionRoute.js')
-const rateLimit = require('express-rate-limit')
+const filesRouter = require('./routes/files.router.js')
+const trainings = require('./routes/trainings.router.js')
 
 const userCreationLimiter = rateLimit({
   windowMs: 1 * 60 * 1000, // Ventana de tiempo de 15 minutos
@@ -25,7 +25,7 @@ app.use(express.json({ limit: '50mb' }))
 app.use(express.urlencoded({ limit: '50mb', extended: false }))
 app.use(cors())
 app.use(morgan('dev'))
-app.use("/public", express.static(path.join(__dirname, "../../public")));
+app.use('/public', express.static(path.join(__dirname, '../../public')))
 // app.set('trust proxy', true) // O usar 'loopback' si es local
 app.set('trust proxy', 'loopback')
 

@@ -44,8 +44,6 @@ class UserController {
         status: 'ACTIVE'
       })
 
-      console.log(user)
-
       if (user.affectedRows) {
         const payload = { user_id: user.data.id }
         const token = jwt.sign(payload, process.env.SECRET_KEY, { expiresIn: '5m' })

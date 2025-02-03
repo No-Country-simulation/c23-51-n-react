@@ -8,6 +8,8 @@ const { validateCreateExercise } = require('../validations/exerciseValidations.j
 const exerciseModel = new ExerciseModel(pool)
 const exerciseController = new ExerciseController(exerciseModel)
 router
+  .get('/exercises',
+    exerciseController.getAllExercises.bind(exerciseController))
   .post('/exercises',
     validateCreateExercise,
     exerciseController.createExercise.bind(exerciseController)

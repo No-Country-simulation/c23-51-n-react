@@ -6,6 +6,7 @@ const webHookRoute = require('./routes/WebhookRoute.js')
 const productRoute = require('./routes/ProductRoute.js')
 const planRoute = require('./routes/PlanRoute.js')
 const exerciseRoute = require('./routes/ExerciseRoute.js')
+const exerciseRoutineRoute = require('./routes/RoutineRoute.js')
 const suscriptionRoute = require('./routes/SuscriptionRoute.js')
 const rateLimit = require('express-rate-limit')
 
@@ -28,6 +29,7 @@ app.use('/api', productRoute)
 app.use('/api', planRoute)
 app.use('/api', suscriptionRoute)
 app.use('/api', exerciseRoute)
+app.use('/api', exerciseRoutineRoute)
 app.use('/api', webHookRoute)
 
 module.exports = { app }

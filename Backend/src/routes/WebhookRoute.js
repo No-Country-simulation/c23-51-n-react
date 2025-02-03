@@ -1,17 +1,20 @@
 const express = require('express')
 const router = express.Router()
-const ProductController = require('../controllers/ProductController.js')
-const ProductModel = require('../models/ProductModel.js')
+const AuthMiddleware = require('../middlewares/authMiddleware.js')
+const UserModel = require('../models/UserModel.js')
+const WebHookController = require('../controllers/webhookController.js')
+const SuscriptionModel = require('../models/SuscriptionModel.js')
 const { connection: pool } = require('../config/db.js')
-const { validateCreateProduct } = require('../validations/productValidations.js')
 
-const productModel = new ProductModel(pool)
-const webHookController = new ProductController(productModel)
+const userModel = new UserModel(pool)
+const suscriptionModel = new SuscriptionModel(pool)
+const webHookController = new WebHookController(suscriptionModel)
+const authMiddleware = new AuthMiddleware(process.env.SECRET_KEY, userModel)
 
 router
   .post('/webhook/paypal',
-    validateCreateProduct,
-    webHookController.createProduct.bind(webHookController)
+    authMiddleware.validateToken.bind(authMiddleware),
+    webHookController.handleWebHook.bind(webHookController)
   )
 
 module.exports = router

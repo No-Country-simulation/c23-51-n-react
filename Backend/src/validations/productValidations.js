@@ -1,7 +1,5 @@
 const { body } = require('express-validator')
 
-console.log('entre')
-
 const validateCreateProduct = [
   body('name')
     .exists({ checkFalsy: true })

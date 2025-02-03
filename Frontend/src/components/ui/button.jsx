@@ -16,6 +16,7 @@ const buttonVariants = cva(
         outline:
           "rounded-lg border border-tangerine text-base font-bold bg-transparent shadow-sm hover:bg-tangerine/20 text-tangerine uppercase",
         link: "text-cream text-base font-normal leading-5 underline-offset-8 hover:underline decoration-tangerine",
+        tertiary: "text-tangerine/80 text-sm font-normal leading-5",
         playBtn: "rounded-full bg-transparent shadow-btn [&_svg]:size-24 p-0",
       },
       size: {
@@ -23,6 +24,7 @@ const buttonVariants = cva(
         sm: "h-8 rounded-md px-3 text-xs",
         lg: "h-10 rounded-md px-8",
         icon: "size-20",
+        link: "p-0",
       },
     },
     defaultVariants: {

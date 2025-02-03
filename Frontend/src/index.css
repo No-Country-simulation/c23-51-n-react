@@ -77,7 +77,7 @@
   }
 }
 
-.hero-img {
+.hero-img, .img-gradient {
   mask-image: linear-gradient(black 80%, transparent);
 }
 

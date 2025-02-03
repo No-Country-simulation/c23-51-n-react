@@ -8,6 +8,8 @@ import Home from "@/pages/Home";
 import Subscription from "./pages/Subscription";
 import Rutinas from "./pages/Rutinas";
 import WorkoutComponent from "./components/WorkoutComponent";
+import Layout from "./components/common/Layout";
+
 
 function App() {
   return (
@@ -22,11 +24,12 @@ function App() {
         </Route>
 
         {/* Rutas protegidas */}
-        <Route element={<ProtectedRoute />}>
-          <Route path="/home" element={<Home />} />
-          <Route path="/rutinas" element={<Rutinas />} />
+        <Route element={<Layout />}>
+          <Route element={<ProtectedRoute />}>
+            <Route path="/home" element={<Home />} />
+               <Route path="/rutinas" element={<Rutinas />} />
           <Route path="/rutinas/:categoria" element={<WorkoutComponent />} />
-          <Route path="/subscription" element={<Subscription />} />
+            <Route path="/subscription" element={<Subscription />} />
         </Route>
       </Routes>
     </>

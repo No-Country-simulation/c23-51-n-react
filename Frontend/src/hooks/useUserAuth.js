@@ -1,36 +1,59 @@
 import useAuthStore from "@/store/authStore";
+import useFormStore from "@/store/formStore";
 import { fetchData } from "@/utils/fetchData";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router";
 import { toast } from "sonner";
 
+
 export const useRegister = () => {
-  const navigate = useNavigate();
-  return useMutation({
-    mutationFn: async (data) => {
-      return await fetchData("auth/register", "POST", {
-        email: data.email,
-        password: data.password,
-        name: data.name,
-        birthdate: data.birthdate,
-        height: data.height,
-        weight: data.weight,
+  const login = useAuthStore((state) => state.login);
+  const formData = useFormStore((state) => state.formData);
+
+  const registerMutation = useMutation({
+    mutationFn: async () => {
+      const response = await fetchData("auth/register", "POST", {
+        email: formData.email,
+        password: formData.password,
+        name: formData.name,
+        last_name: "Apellido",
+        gender: formData.gender,
+        goals: formData.goals,
+        activityLevel: formData.activityLevel,
+        birth: formData.birthdate,
+        height: "0.00",
+        weight: "0.00",
+        country: "País",
       });
-    },
-    onSuccess: () => {
-      toast.success("Registrado correctamente");
-      navigate("/login");
-    },
-    onError: (error) => {
-      if (error.message.includes("409")) {
-        toast.error("El correo electrónico ya está registrado");
+      
+      if (response.success && response.data && response.data.token) {
+        const expiresAt = new Date(Date.now() + 60 * 60 * 1000).toISOString();
+
+        return {
+          token: response.data.token,
+          expiresAt: expiresAt
+        };
       } else {
-        toast.error("Error de registro", {
-          description: error.message,
-        });
+        throw new Error("No se recibió un token válido del servidor");
       }
     },
+    onSuccess: (authData) => {
+      toast.success("Registro completado correctamente");
+      login(authData); // Llama a la función login con el token y la fecha de expiración
+    },
+    onError: (error) => {
+      toast.error("Error en el registro", {
+        description: error.message || "Por favor, intenta nuevamente",
+      });
+    },
   });
+
+  return {
+    register: () => registerMutation.mutateAsync(),
+    isLoading: registerMutation.isLoading,
+    isError: registerMutation.isError,
+    isSuccess: registerMutation.isSuccess,
+  };
 };
 
 export const useLogin = () => {
@@ -51,7 +74,7 @@ export const useLogin = () => {
       queryClient.setQueryData(["user"], { token, expiresAt });
 
       toast.success("Bienvenido!");
-      navigate("/dashboard");
+      navigate("/home");
     },
     onError: (error) => {
       if (error.message.includes("400")) {

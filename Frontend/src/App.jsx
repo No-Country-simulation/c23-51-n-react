@@ -1,22 +1,36 @@
+import "@fontsource-variable/lexend";
 import { Route, Routes } from "react-router";
 import Register from "@/pages/Register";
-import Home from "@/pages/Home";
+import LandingPage from "@/pages/LandingPage";
 import Login from "@/pages/Login";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
-import Dashboard from "@/pages/Dashboard";
-import "@fontsource/abel";
-import "@fontsource-variable/lexend";
+import Layout from "./components/common/Layout";
+import Home from "@/pages/Home";
+import Subscription from "@/pages/Subscription";
+import Rutinas from "@/pages/Rutinas";
+import WorkoutComponent from "@/components/WorkoutComponent";
+import Profile from "@/pages/Profile";
 
 function App() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
+        {/* Rutas públicas */}
+        <Route element={<ProtectedRoute isPublic />}>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+        </Route>
 
-        <Route element={<ProtectedRoute />}>
-          <Route path="/dashboard" element={<Dashboard />} />
+        {/* Rutas protegidas */}
+        <Route element={<Layout />}>
+          <Route element={<ProtectedRoute />}>
+            <Route path="/home" element={<Home />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/routines" element={<Rutinas />} />
+            <Route path="/routines/:categoria" element={<WorkoutComponent />} />
+            <Route path="/subscription" element={<Subscription />} />
+          </Route>
         </Route>
       </Routes>
     </>

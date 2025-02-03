@@ -22,8 +22,6 @@ class RoutineModel {
     try {
       const pool = this.db
 
-      console.log(id)
-
       const [rows] = await pool.query('SELECT * FROM v_exercise_routine_video WHERE routine_id = ?', [id])
       const routines = formatRoutine(rows)
       return routines

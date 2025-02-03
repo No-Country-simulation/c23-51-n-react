@@ -19,14 +19,8 @@ class AuthMiddleware {
     const token = header.split(' ')[1]
 
     try {
-      console.log(token)
-
       const decoded = jwt.verify(token, this.secretKey)
-
-      console.log(decoded.user_id)
-
       const user = await this.userModel.findById(decoded.user_id)
-      console.log(user)
 
       if (!user) {
         return res.status(404).json({ message: 'Usuario no encontrado' })

@@ -4,8 +4,12 @@ import Register from "@/pages/Register";
 import LandingPage from "@/pages/LandingPage";
 import Login from "@/pages/Login";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
+import Layout from "./components/common/Layout";
 import Home from "@/pages/Home";
-import Subscription from "./pages/Subscription";
+import Subscription from "@/pages/Subscription";
+import Rutinas from "@/pages/Rutinas";
+import WorkoutComponent from "@/components/WorkoutComponent";
+import Profile from "@/pages/Profile";
 
 function App() {
   return (
@@ -19,9 +23,14 @@ function App() {
         </Route>
 
         {/* Rutas protegidas */}
-        <Route element={<ProtectedRoute />}>
-          <Route path="/home" element={<Home />} />
-          <Route path="/subscription" element={<Subscription />} />
+        <Route element={<Layout />}>
+          <Route element={<ProtectedRoute />}>
+            <Route path="/home" element={<Home />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/routines" element={<Rutinas />} />
+            <Route path="/routines/:categoria" element={<WorkoutComponent />} />
+            <Route path="/subscription" element={<Subscription />} />
+          </Route>
         </Route>
       </Routes>
     </>

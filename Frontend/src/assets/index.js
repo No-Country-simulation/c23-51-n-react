@@ -1,4 +1,5 @@
-import logo from "./Logo_Momentum.png";
+// import logo from "./Logo_Momentum.png";
+import logo from "./IMAGOTIPO.png";
 import inicio_boy from "./carousel/inicio_mobile_boy.png";
 import inicio_girl from "./carousel/inicio_mobile_girl.png";
 import inicio_man from "./carousel/inicio_mobile_man.png";

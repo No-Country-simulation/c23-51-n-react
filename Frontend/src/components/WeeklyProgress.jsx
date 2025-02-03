@@ -1,33 +1,32 @@
-import { useState } from "react";
-
-const WeeklyProgress = ({ onSelectDay }) => {
-  const [selectedDay, setSelectedDay] = useState("LU");
-  const days = ["DO", "LU", "MA", "MI", "JU", "VI", "SA"]; // Evita conflictos con "M"
-
-  const handleDayClick = (day) => {
-    setSelectedDay(day);
-    if (onSelectDay) {
-      onSelectDay(day);
-    }
-  };
+const WeeklyProgress = () => {
+  const days = [
+    { id: "D", completed: true },
+    { id: "L", completed: true },
+    { id: "M", completed: true },
+    { id: "M", completed: true },
+    { id: "J", completed: false },
+    { id: "V", completed: false },
+    { id: "S", completed: false },
+  ];
 
   return (
-    <section className="mt-6">
-      <h2 className="text-sm text-gray-400">Tu progreso esta semana</h2>
-      <div className="grid grid-cols-7 gap-2 mt-2">
-        {days.map((day) => (
-          <div
-            key={day}
-            onClick={() => handleDayClick(day)}
-            className={`w-full h-4 flex items-center justify-center rounded-full cursor-pointer ${
-              selectedDay === day ? "bg-orange-500 text-black" : "bg-gray-600 text-white"
-            }`}
-          >
-            <span className="text-xs font-bold">{day}</span>
+    <div className="w-full max-w-md pt-8">
+      <h2 className="mb-8 text-base font-bold leading-5 text-center">Tu progreso esta semana</h2>
+      <div className="flex gap-2">
+        {days.map((day, index) => (
+          <div key={`${day.id}-${index}`} className="flex-1">
+            <div
+              className={`h-2 rounded-full mb-2 ${day.completed ? "bg-tangerine" : "bg-coalGrey"}`}
+              role="progressbar"
+              aria-valuenow={day.completed ? 100 : 0}
+              aria-valuemin={0}
+              aria-valuemax={100}
+            />
+            <span className="block text-sm text-center">{day.id}</span>
           </div>
         ))}
       </div>
-    </section>
+    </div>
   );
 };
 

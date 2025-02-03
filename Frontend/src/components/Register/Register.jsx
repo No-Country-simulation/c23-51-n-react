@@ -26,7 +26,13 @@ const Register = ({
         )}
       </div>
       <div className="flex items-center justify-center">
-        <img src={logo} alt="Logo Momentum" className="z-10 object-contain" />
+        <img
+          src={logo}
+          alt="Logo Momentum"
+          width={46}
+          height={35}
+          className="z-10 object-contain w-20 h-auto"
+        />
       </div>
       <div
         className={cn(

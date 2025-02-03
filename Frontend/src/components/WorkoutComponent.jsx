@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
-import { Play, Pause, Heart, ArrowLeft, Clock } from 'lucide-react';
-import useToggleSection from '../hooks/useToggleSection';
-import ExerciseBlock from '../components/ExerciseBlock';
-import { replace, useNavigate } from 'react-router';
-import { videoPage } from '@/assets';
+import { useState } from "react";
+import { ArrowLeft } from "lucide-react";
+import useToggleSection from "@/hooks/useToggleSection";
+import ExerciseBlock from "@/components/ExerciseBlock";
+import { useNavigate } from "react-router";
+import { HeartOutline, PauseIcon, VideoIcon, videoPage } from "@/assets";
+import { Badge } from "@/components/ui/badge";
+import RoutineTimeIntensity from "./RoutineTimeIntensity";
 
 const WorkoutComponent = () => {
   const [openSection, toggleSection] = useToggleSection();
@@ -12,19 +14,32 @@ const WorkoutComponent = () => {
   const navigate = useNavigate();
 
   const warmUpExercises = [
-    { name: 'Rotaciones de Brazos', steps: ['30 Segundos hacia adelante', '30 Segundos hacia atrás'], details: 'De pie, con los brazos extendidos lateralmente, realizar círculos amplios.' }
+    {
+      name: "Rotaciones de Brazos",
+      steps: ["30 Segundos hacia adelante", "30 Segundos hacia atrás"],
+      details: "De pie, con los brazos extendidos lateralmente, realizar círculos amplios.",
+    },
   ];
 
   const routineExercises = [
-    { name: 'Rotaciones de Brazos', steps: ['30 Segundos hacia adelante', '30 Segundos hacia atrás'], details: 'De pie, con los brazos extendidos lateralmente, realizar círculos amplios.' }
+    {
+      name: "Rotaciones de Brazos",
+      steps: ["30 Segundos hacia adelante", "30 Segundos hacia atrás"],
+      details: "De pie, con los brazos extendidos lateralmente, realizar círculos amplios.",
+    },
   ];
 
   const stretchingExercises = [
-    { name: 'Estiramiento de Cuádriceps', steps: ['30 segundos por pierna'], details: 'De pie, sujetarse el tobillo y llevar el talón hacia los glúteos, manteniendo la rodilla alineada.' }
+    {
+      name: "Estiramiento de Cuádriceps",
+      steps: ["30 segundos por pierna"],
+      details:
+        "De pie, sujetarse el tobillo y llevar el talón hacia los glúteos, manteniendo la rodilla alineada.",
+    },
   ];
 
   const handleBack = () => {
-    navigate("/rutinas", {
+    navigate("/routines", {
       replace: true,
     });
   };
@@ -36,18 +51,18 @@ const WorkoutComponent = () => {
       } else {
         videoRef.play();
       }
-      setIsPlaying(!isPlaying); 
+      setIsPlaying(!isPlaying);
     }
   };
 
   return (
-    <div className="bg-black text-white min-h-screen p-4 font-sans pb-20">
+    <>
       <div className="relative">
         <video
           id="workoutVideo"
-          className="w-full rounded-lg mb-4"
+          className="w-full mb-4 rounded-lg"
           muted
-          ref={(ref) => setVideoRef(ref)} 
+          ref={(ref) => setVideoRef(ref)}
         >
           <source src={videoPage} type="video/mp4" />
           Your browser does not support the video tag.
@@ -57,10 +72,10 @@ const WorkoutComponent = () => {
         {!isPlaying && (
           <button
             onClick={handlePlayPause}
-            className="absolute inset-0 flex items-center justify-center bg-orange-500 rounded-full h-12 w-12 m-auto"
+            className="absolute inset-0 flex items-center justify-center w-12 h-12 m-auto rounded-full bg-tangerine"
             aria-label="Play Video"
           >
-            <Play className="h-5 w-5 text-white" />
+            <VideoIcon />
           </button>
         )}
 
@@ -68,42 +83,43 @@ const WorkoutComponent = () => {
         {isPlaying && (
           <button
             onClick={handlePlayPause}
-            className="absolute inset-0 flex items-center justify-center bg-orange-500 rounded-full h-12 w-12 m-auto"
+            className="absolute inset-0 flex items-center justify-center w-12 h-12 m-auto rounded-full bg-tangerine"
             aria-label="Pause Video"
           >
-            <Pause className="h-5 w-5 text-white" />
+            <PauseIcon />
           </button>
         )}
 
-        <button
-          className="absolute top-2 left-2"
-          onClick={handleBack}
-          aria-label="Back to menu"
-        >
-          <ArrowLeft className="h-6 w-6 text-white cursor-pointer" />
+        <button className="absolute top-2 left-2" onClick={handleBack} aria-label="Back to menu">
+          <ArrowLeft className="w-6 h-6 cursor-pointer" />
         </button>
-        <div className="absolute bottom-2 left-2 flex items-center bg-black bg-opacity-50 rounded px-2 py-1">
-          <Clock className="h-4 w-4 text-orange-500 mr-1" />
-          <span className="text-xs text-orange-500">35'</span>
+        {/*         
+        <div className="absolute flex items-center px-2 py-1 bottom-2 left-2">
+          <TimeIcon />
+          <span className="text-xs text-tangerine">35&apos;</span>
         </div>
-        <div className="absolute bottom-2 right-2 flex items-center bg-black bg-opacity-50 rounded px-2 py-1">
-          <span className="text-xs text-orange-500">Intensidad Baja</span>
-        </div>
+        <div className="absolute flex items-center px-2 py-1 bottom-2 right-2">
+          <span className="text-xs text-tangerine">Intensidad Baja</span>
+        </div> */}
+
+        <RoutineTimeIntensity time={"10"} intensity={"baja"} />
+
         <div className="absolute top-2 right-2">
-          <Heart className="h-6 w-6 text-white cursor-pointer" aria-label="Favorite" />
+          <HeartOutline />
         </div>
       </div>
 
       <h1 className="text-2xl font-bold">ACTIVA TU ENERGÍA</h1>
-      <p className="mt-2">Mejora tu técnica, resistencia y movilidad con este entrenamiento de calistenia. Comienza a moverte y siente el progreso.</p>
+      <p className="mt-2">
+        Mejora tu técnica, resistencia y movilidad con este entrenamiento de calistenia. Comienza a
+        moverte y siente el progreso.
+      </p>
 
-      <div className="mt-4">
-        <div className="flex space-x-2 mb-4">
-          <span className="bg-gray-800 text-white text-xs font-bold px-2 py-1 rounded">Resistencia</span>
-          <span className="bg-gray-800 text-white text-xs font-bold px-2 py-1 rounded">Técnica</span>
-          <span className="bg-gray-800 text-white text-xs font-bold px-2 py-1 rounded">Fuerza</span>
-          <span className="bg-gray-800 text-white text-xs font-bold px-2 py-1 rounded">Movilidad</span>
-        </div>
+      <div className="flex flex-wrap gap-2 mt-4">
+        <Badge>Resistencia</Badge>
+        <Badge>Técnica</Badge>
+        <Badge>Fuerza</Badge>
+        <Badge>Movilidad</Badge>
       </div>
 
       <ExerciseBlock
@@ -138,7 +154,7 @@ const WorkoutComponent = () => {
         toggleSection={toggleSection}
         sectionKey="stretching"
       />
-    </div>
+    </>
   );
 };
 

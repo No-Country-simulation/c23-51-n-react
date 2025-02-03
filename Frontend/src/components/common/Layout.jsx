@@ -1,4 +1,5 @@
 import { Outlet } from "react-router";
+import BottomNav from "./BottomNav";
 
 const Layout = () => {
   return (
@@ -6,6 +7,7 @@ const Layout = () => {
       <div>
         <Outlet />
       </div>
+      <BottomNav />
     </div>
   );
 };

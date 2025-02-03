@@ -9,6 +9,7 @@ import Home from "@/pages/Home";
 import Subscription from "@/pages/Subscription";
 import Rutinas from "@/pages/Rutinas";
 import WorkoutComponent from "@/components/WorkoutComponent";
+import Profile from "@/pages/Profile";
 
 function App() {
   return (
@@ -25,7 +26,8 @@ function App() {
         <Route element={<Layout />}>
           <Route element={<ProtectedRoute />}>
             <Route path="/home" element={<Home />} />
-            <Route path="/rutinas" element={<Rutinas />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/routines" element={<Rutinas />} />
             <Route path="/rutinas/:categoria" element={<WorkoutComponent />} />
             <Route path="/subscription" element={<Subscription />} />
           </Route>

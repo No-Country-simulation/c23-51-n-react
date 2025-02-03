@@ -1,6 +1,10 @@
 const express = require('express')
 const cors = require('cors')
 const morgan = require('morgan')
+const rateLimit = require('express-rate-limit')
+const path = require('path')
+
+
 const userRoute = require('./routes/UserRoute.js')
 const webHookRoute = require('./routes/WebhookRoute.js')
 const productRoute = require('./routes/ProductRoute.js')
@@ -21,6 +25,7 @@ app.use(express.json({ limit: '50mb' }))
 app.use(express.urlencoded({ limit: '50mb', extended: false }))
 app.use(cors())
 app.use(morgan('dev'))
+app.use("/public", express.static(path.join(__dirname, "../../public")));
 // app.set('trust proxy', true) // O usar 'loopback' si es local
 app.set('trust proxy', 'loopback')
 
@@ -31,5 +36,7 @@ app.use('/api', suscriptionRoute)
 app.use('/api', exerciseRoute)
 app.use('/api', exerciseRoutineRoute)
 app.use('/api', webHookRoute)
+app.use('/api', filesRouter)
+app.use('/api', trainings)
 
 module.exports = { app }

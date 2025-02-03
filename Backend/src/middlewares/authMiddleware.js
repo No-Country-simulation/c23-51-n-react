@@ -19,17 +19,27 @@ class AuthMiddleware {
     const token = header.split(' ')[1]
 
     try {
-      // Decodificar el token (esta parte sigue siendo síncrona)
+      console.log(token)
+
       const decoded = jwt.verify(token, this.secretKey)
 
-      // Buscar al usuario en la base de datos
+      console.log(decoded.user_id)
+
       const user = await this.userModel.findById(decoded.user_id)
+      console.log(user)
+
       if (!user) {
         return res.status(404).json({ message: 'Usuario no encontrado' })
       }
 
-      req.user_id = user.id // Adjuntar los datos del usuario al objeto req
-      next() // Pasar al siguiente middleware o controlador
+      req.user = {
+        ...(decoded.user_id && { id: decoded.user_id }),
+        ...(decoded.plan_id && { plan_id: decoded.plan_id }),
+        ...(decoded.email && { email: decoded.email }),
+        ...(decoded.name && { name: decoded.name })
+      }
+
+      next()
     } catch (error) {
       return res.status(401).json({
         status: 401,

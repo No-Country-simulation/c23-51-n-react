@@ -44,6 +44,8 @@ class UserController {
         status: 'ACTIVE'
       })
 
+      console.log(user)
+
       if (user.affectedRows) {
         const payload = { user_id: user.data.id }
         const token = jwt.sign(payload, process.env.SECRET_KEY, { expiresIn: '5m' })
@@ -79,7 +81,7 @@ class UserController {
 
   async createProfileUser (req, res) {
     const { last_name: lastName, birth, photo, height, weight, gender, country, goals, activityLevel } = req.body
-    const userId = req.user_id
+    const userId = req.user.user_id
 
     try {
       const errors = validationResult(req)

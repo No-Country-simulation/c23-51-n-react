@@ -82,6 +82,8 @@ class userModel {
 
   async findById (id) {
     try {
+      console.log(id)
+
       const pool = this.db
       const [[user]] = await pool.query(`SELECT 
           id,

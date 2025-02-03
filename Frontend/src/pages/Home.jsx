@@ -1,4 +1,3 @@
-import { Link } from "react-router";
 import { Button } from "../../src/components/ui/button";
 import { home1, home2 } from "@/assets";
 import WeeklyProgress from "@/components/WeeklyProgress";
@@ -21,32 +20,47 @@ const Home = () => {
 
       <section className="mt-6">
         <div className="flex items-center justify-between">
-          <h3 className="text-lg font-bold">Tu rutina del día</h3>
-          <Link to="/routines" className="text-sm text-tangerine">
+          <h3 className="text-2xl font-bold">Tu rutina del día</h3>
+          <Button variant="tertiary" size="link">
             Ver todos
-          </Link>
+          </Button>
         </div>
         <div className="relative mt-3 overflow-hidden rounded-lg">
-          <img src={home1} alt="Rutina" className="object-cover w-full opacity-80" />
-          <div className="absolute bottom-4 left-4">
-            <p className="text-sm">Inicial</p>
-            <h4 className="text-lg font-bold">ACTIVA TU ENERGÍA</h4>
+          <img
+            src={home1}
+            alt="Rutina"
+            className="object-cover w-full opacity-80 h-[220px] img-gradient"
+          />
+          <div className="absolute flex-row bottom-4 left-4">
+            <div className="flex flex-row gap-2 place-items-end">
+            <div className="relative flex flex-col gap-1 bottom-1">
+              <div className="bg-transparent border-2 rounded-full size-3 border-tangerine" />
+              <div className="bg-transparent border-2 rounded-full size-3 border-tangerine" />
+              <div className="rounded-full size-3 bg-tangerine" />
+            </div>
+            <p className="text-sm font-normal">Inicial</p>
+            </div>
+            <h4 className="text-base font-bold">ACTIVA TU ENERGÍA</h4>
           </div>
         </div>
       </section>
 
       <section className="mt-6">
         <div className="flex items-center justify-between">
-          <h3 className="text-lg font-bold">Ejercicio del día</h3>
-          <Link to="/routines" className="text-sm text-tangerine">
+          <h3 className="text-2xl font-bold">Ejercicio del día</h3>
+          <Button variant="tertiary" size="link">
             Ver todos
-          </Link>
+          </Button>
         </div>
         <div className="relative mt-3 overflow-hidden rounded-lg">
-          <img src={home2} alt="Ejercicio" className="object-cover w-full opacity-80" />
+          <img
+            src={home2}
+            alt="Ejercicio"
+            className="object-cover w-full opacity-80 h-[220px] img-gradient"
+          />
           <div className="absolute bottom-4 left-4">
-            <p className="text-sm">Técnica</p>
-            <h4 className="text-lg font-bold">¡ROMPE TUS LÍMITES!</h4>
+            <p className="text-sm font-normal">Técnica</p>
+            <h4 className="text-base font-bold">¡ROMPE TUS LÍMITES!</h4>
           </div>
         </div>
       </section>

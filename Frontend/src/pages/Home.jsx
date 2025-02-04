@@ -2,6 +2,7 @@ import { Button } from "../../src/components/ui/button";
 import { home1, home2 } from "@/assets";
 import WeeklyProgress from "@/components/WeeklyProgress";
 import UserAvatar from "@/assets/icons/UserAvatar";
+import { Link } from "react-router";
 
 const Home = () => {
   return (
@@ -25,24 +26,27 @@ const Home = () => {
             Ver todos
           </Button>
         </div>
-        <div className="relative mt-3 overflow-hidden rounded-lg">
-          <img
-            src={home1}
-            alt="Rutina"
-            className="object-cover w-full opacity-80 h-[220px] img-gradient"
-          />
-          <div className="absolute flex-row bottom-4 left-4">
-            <div className="flex flex-row gap-2 place-items-end">
-            <div className="relative flex flex-col gap-1 bottom-1">
-              <div className="bg-transparent border-2 rounded-full size-3 border-tangerine" />
-              <div className="bg-transparent border-2 rounded-full size-3 border-tangerine" />
-              <div className="rounded-full size-3 bg-tangerine" />
+
+        <Link to="/routines/daily-routine">
+          <div className="relative mt-3 overflow-hidden rounded-lg">
+            <img
+              src={home1}
+              alt="Rutina"
+              className="object-cover w-full opacity-80 h-[220px] img-gradient"
+            />
+            <div className="absolute flex-row bottom-4 left-4">
+              <div className="flex flex-row gap-2 place-items-end">
+                <div className="relative flex flex-col gap-1 bottom-1">
+                  <div className="bg-transparent border-2 rounded-full size-3 border-tangerine" />
+                  <div className="bg-transparent border-2 rounded-full size-3 border-tangerine" />
+                  <div className="rounded-full size-3 bg-tangerine" />
+                </div>
+                <p className="text-sm font-normal">Inicial</p>
+              </div>
+              <h4 className="text-base font-bold">ACTIVA TU ENERGÍA</h4>
             </div>
-            <p className="text-sm font-normal">Inicial</p>
-            </div>
-            <h4 className="text-base font-bold">ACTIVA TU ENERGÍA</h4>
           </div>
-        </div>
+        </Link>
       </section>
 
       <section className="mt-6">
@@ -65,7 +69,9 @@ const Home = () => {
         </div>
       </section>
 
-      <Button className="mt-6 mb-16">ENTRENAR</Button>
+      <Link to="/routines">
+        <Button className="mt-6 mb-16">ENTRENAR</Button>
+      </Link>
     </div>
   );
 };

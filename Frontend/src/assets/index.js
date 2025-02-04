@@ -4,8 +4,8 @@ import inicio_boy from "./carousel/inicio_mobile_boy.png";
 import inicio_girl from "./carousel/inicio_mobile_girl.png";
 import inicio_man from "./carousel/inicio_mobile_man.png";
 import registerMan from "./register_suscription_man.png";
-import home1 from "./gradient.png"
-import home2 from "./gradient2.png"
+import home1 from "./gradient.png";
+import home2 from "./gradient2.png";
 
 //Routines
 
@@ -14,7 +14,7 @@ import routine2 from "./routines/routine2.png";
 import routine3 from "./routines/routine3.png";
 import routine4 from "./routines/routine4.png";
 import routine5 from "./routines/routine5.png";
-
+import coverGirl from "./routines/routine_cover_girl.png";
 
 // icons
 import arrowBack from "./icons/arrow_back.svg";
@@ -43,7 +43,7 @@ import ThunderIcon from "./icons/iconThunder";
 import TimeIcon from "./icons/iconTime";
 import TipIcon from "./icons/TipIcon";
 import VideoIcon from "./icons/VideoIcon";
-import videoPage from "./video/Plancha.mp4"
+import videoPage from "./video/Plancha.mp4";
 
 import loader from "./Loader-anim.png";
 
@@ -82,12 +82,13 @@ export {
   registerMan,
   securityLock,
   close,
-    //Routines
-    routine1,
-    routine2,
-    routine3,
-    routine4,
-    routine5,
-    //video
-    videoPage
+  //Routines
+  routine1,
+  routine2,
+  routine3,
+  routine4,
+  routine5,
+  coverGirl,
+  //video
+  videoPage,
 };

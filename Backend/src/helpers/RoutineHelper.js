@@ -1,4 +1,4 @@
-export const formatRoutine = (rows) => {
+ const formatRoutine = (rows) => {
   const routinesMap = {}
   rows.forEach((row) => {
     if (!routinesMap[row.routine_id]) {
@@ -35,3 +35,7 @@ export const formatRoutine = (rows) => {
 
   return Object.values(routinesMap)
 }
+
+module.exports = {
+  formatRoutine
+};

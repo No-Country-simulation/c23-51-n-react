@@ -44,6 +44,10 @@ import TimeIcon from "./icons/iconTime";
 import TipIcon from "./icons/TipIcon";
 import VideoIcon from "./icons/VideoIcon";
 import videoPage from "./video/Plancha.mp4";
+import CommentIcon from "./icons/CommentIcon.jsx";
+import HelpIcon from "./icons/HelpIcon.jsx";
+import SettingIcon from "./icons/SettingIcon.jsx";
+import EditIcon from "./icons/EditIcon.jsx";
 
 import loader from "./Loader-anim.png";
 
@@ -62,6 +66,10 @@ export {
   TimeIcon,
   TipIcon,
   VideoIcon,
+  CommentIcon,
+  HelpIcon,
+  SettingIcon,
+  EditIcon,
   inicio_boy,
   inicio_girl,
   inicio_man,

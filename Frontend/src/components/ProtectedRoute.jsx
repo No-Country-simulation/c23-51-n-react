@@ -7,19 +7,13 @@ export const ProtectedRoute = ({ isPublic = false }) => {
   const { isAuthenticated, isTokenValid, logout } = useAuthStore();
   const location = useLocation();
 
-  const publicRoutes = ["/", "/login", "/register"];
+  const publicRoutes = ["/", "/login", "/register", "/forgot-password"];
 
   useEffect(() => {
     if (isAuthenticated && !isTokenValid()) {
       logout();
     }
   }, [isAuthenticated, isTokenValid, logout]);
-
-  // Permitir acceso a la ruta de registro sin importar el estado de autenticación por tema del form multistep
-  // luego podemos mirar cómo manejar esto de una mejor manera xd
-  if (location.pathname === "/register") {
-    return <Outlet />;
-  }
 
   if (!isAuthenticated || !isTokenValid()) {
     if (isPublic) {

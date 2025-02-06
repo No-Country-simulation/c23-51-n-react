@@ -12,6 +12,7 @@ import WorkoutComponent from "@/components/WorkoutComponent";
 import Profile from "@/pages/Profile";
 import RoutineDetails from "./components/RoutineDetails";
 import ProfileEdit from "@/pages/ProfileEdit";
+import ForgotPassword from "@/pages/ForgotPassword";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/" element={<LandingPage />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
         </Route>
 
         {/* Rutas protegidas */}

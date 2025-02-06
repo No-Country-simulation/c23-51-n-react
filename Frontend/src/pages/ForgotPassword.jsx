@@ -1,11 +1,13 @@
 import { arrowBack, logo } from "@/assets";
-import LoginForm from "@/components/LoginForm";
+import ForgotPasswordForm from "@/components/Login/ForgotPasswordForm";
 import { useNavigate } from "react-router";
 
-const Login = () => {
+const ForgotPassword = () => {
   const navigate = useNavigate();
   const handleBack = () => {
-    navigate("/");
+    navigate(-1, {
+      replace: true,
+    });
   };
   return (
     <div className="max-w-md min-h-screen p-4 mx-auto">
@@ -24,10 +26,10 @@ const Login = () => {
         />
       </div>
       <div className="relative flex flex-col pt-12 justify-between min-h-[calc(100vh-120px)]">
-        <LoginForm />
+        <ForgotPasswordForm />
       </div>
     </div>
   );
 };
 
-export default Login;
+export default ForgotPassword;

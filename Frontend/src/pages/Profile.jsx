@@ -48,13 +48,13 @@ const Profile = () => {
           </div>
         </div>
 
-        <div className="flex items-center justify-center gap-2">
+        <div className="flex items-center justify-center gap-2 pb-10">
           <Button
             id="logout"
             name="logout"
             variant="ghost"
             onClick={handleLogout}
-            className="[&_svg]:size-6"
+            className="[&_svg]:size-6 mb-10"
           >
             <LogOut color="#FF4E23" size={24} />
             <h1 className="font-normal text-tomato">Cerrar Sesión</h1>

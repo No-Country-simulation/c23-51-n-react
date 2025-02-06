@@ -1,9 +1,8 @@
 import { useState } from "react";
-import { ArrowLeft } from "lucide-react";
+import { useNavigate } from "react-router";
 import useToggleSection from "@/hooks/useToggleSection";
 import ExerciseBlock from "@/components/ExerciseBlock";
-import { useNavigate } from "react-router";
-import { HeartOutline, PauseIcon, VideoIcon, videoPage } from "@/assets";
+import { arrowBack, HeartOutline, PauseIcon, VideoIcon, videoPage } from "@/assets";
 import { Badge } from "@/components/ui/badge";
 import RoutineTimeIntensity from "./RoutineTimeIntensity";
 
@@ -91,16 +90,8 @@ const WorkoutComponent = () => {
         )}
 
         <button className="absolute top-2 left-2" onClick={handleBack} aria-label="Back to menu">
-          <ArrowLeft className="w-6 h-6 cursor-pointer" />
+          <img src={arrowBack} alt="Arrow back" className="size-6" />
         </button>
-        {/*         
-        <div className="absolute flex items-center px-2 py-1 bottom-2 left-2">
-          <TimeIcon />
-          <span className="text-xs text-tangerine">35&apos;</span>
-        </div>
-        <div className="absolute flex items-center px-2 py-1 bottom-2 right-2">
-          <span className="text-xs text-tangerine">Intensidad Baja</span>
-        </div> */}
 
         <RoutineTimeIntensity time={"10"} intensity={"baja"} />
 

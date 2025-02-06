@@ -10,6 +10,8 @@ import Subscription from "@/pages/Subscription";
 import Rutinas from "@/pages/Rutinas";
 import WorkoutComponent from "@/components/WorkoutComponent";
 import Profile from "@/pages/Profile";
+import RoutineDetails from "./components/RoutineDetails";
+import ProfileEdit from "@/pages/ProfileEdit";
 
 function App() {
   return (
@@ -27,8 +29,10 @@ function App() {
           <Route element={<ProtectedRoute />}>
             <Route path="/home" element={<Home />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/profile/edit" element={<ProfileEdit />} />
             <Route path="/routines" element={<Rutinas />} />
             <Route path="/routines/:categoria" element={<WorkoutComponent />} />
+            <Route path="/routines/daily-routine" element={<RoutineDetails />} />
             <Route path="/subscription" element={<Subscription />} />
           </Route>
         </Route>

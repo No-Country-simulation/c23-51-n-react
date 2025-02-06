@@ -10,11 +10,13 @@ import {
   FormControl,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "./ui/input";
 import PasswordInput from "@/components/ui/PasswordInput";
+import { logo, arrowBack } from "@/assets";
+import { ForgotPassword } from "./Login/ForgotPassword";
+import { useNavigate } from "react-router";
 
 const loginSchema = z.object({
   email: z.string().min(1, "Este campo es requerido"),
@@ -34,18 +36,27 @@ const LoginForm = () => {
 
   const { mutate: login } = useLogin();
 
+  const navigate = useNavigate();
+
+  const goToRegister = () => {
+    navigate('/register');
+  };
+
   const handleSubmit = (data) => {
     login(data);
   };
 
   return (
-    <Card className="w-full max-w-md border-0 border-none shadow-none">
-      <CardHeader>
+    <Card className="w-full max-w-md border-0 border-none shadow-none custom-card">
+      <CardHeader className="p[75px]">
+      <img className="arrow-back w-[30px] mt-[20px] cursor-pointer" src={arrowBack} alt="logo de momentum" />
+      <img className="logo-momentum" src={logo} alt="logo de momentum" />
         <CardTitle>
-          <span>Acceder</span>
+          <span className="title-card">Iniciar Sesión</span>
+          <div className="subtitle-card">Acceder con tu cuenta y sigue entrenando</div>
         </CardTitle>
       </CardHeader>
-      <CardContent className="space-y-2 ">
+      <CardContent className="space-y-2 pt-[75px]">
         <Form {...loginForm}>
           <form onSubmit={loginForm.handleSubmit(handleSubmit)} className="space-y-4">
             <FormField
@@ -53,9 +64,6 @@ const LoginForm = () => {
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel htmlFor="email">
-                    Email <span className="text-xs text-red-400">*</span>
-                  </FormLabel>
                   <FormControl>
                     <Input
                       type="email"
@@ -65,6 +73,7 @@ const LoginForm = () => {
                       autoComplete="email"
                     />
                   </FormControl>
+                    <span className="text-sm text-cream/80">Ingresa tu correo electrónico</span>
                   <FormMessage />
                 </FormItem>
               )}
@@ -77,12 +86,16 @@ const LoginForm = () => {
               label="Contraseña"
               span="*"
               id="loginPassword"
+              description={'Ingresa tu contrasena'}
             />
-
-            <div className="flex items-center justify-center">
-              <Button type="submit" className="w-full max-w-40" disabled={isMutating > 0}>
-                {isMutating > 0 ? "Ingresando..." : "Ingresar"}
-              </Button>
+            <ForgotPassword />
+            <div className="card-footer">
+                <div className="flex items-center justify-center">
+                  <Button type="submit" className="w-full bg-transparent btn-login" disabled={isMutating > 0}>
+                    {isMutating > 0 ? "Ingresando..." : "Entrar y entrenar"}
+                  </Button>
+                </div>
+                <span className="text-white text-center block p-[3px]">No tienes cuenta? <strong onClick={goToRegister} className=" cursor-pointer">Registrate aquí</strong></span>
             </div>
           </form>
         </Form>

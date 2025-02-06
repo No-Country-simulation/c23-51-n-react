@@ -2,9 +2,13 @@ import { Button } from "../../src/components/ui/button";
 import { home1, home2 } from "@/assets";
 import WeeklyProgress from "@/components/WeeklyProgress";
 import UserAvatar from "@/assets/icons/UserAvatar";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 const Home = () => {
+  const navigate = useNavigate();
+  const goToRoutines = () => {
+    navigate("/routines");
+  };
   return (
     <div className="pb-10">
       <header className="flex items-center gap-4">
@@ -22,7 +26,7 @@ const Home = () => {
       <section className="mt-6">
         <div className="flex items-center justify-between">
           <h3 className="text-2xl font-bold">Tu rutina del día</h3>
-          <Button variant="tertiary" size="link">
+          <Button variant="tertiary" size="link" onClick={goToRoutines}>
             Ver todos
           </Button>
         </div>
@@ -52,7 +56,7 @@ const Home = () => {
       <section className="mt-6">
         <div className="flex items-center justify-between">
           <h3 className="text-2xl font-bold">Ejercicio del día</h3>
-          <Button variant="tertiary" size="link">
+          <Button variant="tertiary" size="link" disabled>
             Ver todos
           </Button>
         </div>

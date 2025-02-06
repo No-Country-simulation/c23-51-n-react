@@ -1,24 +1,18 @@
-/* eslint-disable no-unused-vars */
-import {
-  arrowBack,
-  coverGirl,
-  HeartOutline,
-  MuscleIcon,
-  RepeatIcon,
-  ThunderIcon,
-  TimeIcon,
-  TipIcon,
-  VideoIcon,
-} from "@/assets";
+import { arrowBack, coverGirl, Heart, HeartOutline } from "@/assets";
 import { useNavigate } from "react-router";
 import RoutineTimeIntensity from "./RoutineTimeIntensity";
 import { Badge } from "./ui/badge";
 import { useRoutine } from "@/hooks/useRoutine";
 import { Separator } from "@/components/ui/separator";
 import RoutineAccordion from "./RoutineAccordion";
+import { useState } from "react";
 
 const RoutineDetails = () => {
   const navigate = useNavigate();
+  const [isLiked, setIsLiked] = useState(false);
+  const handleLikeClick = () => {
+    setIsLiked((prevState) => !prevState);
+  };
 
   const { data: routines } = useRoutine();
 
@@ -38,17 +32,17 @@ const RoutineDetails = () => {
         <button onClick={handleBack}>
           <img src={arrowBack} alt="Arrow back" className="size-6" />
         </button>
-        <HeartOutline />
+
+        <button onClick={handleLikeClick} aria-label={isLiked ? "Unlike" : "Like"}>
+          {isLiked ? <Heart /> : <HeartOutline />}
+        </button>
       </header>
       <div className="relative flex flex-col items-center w-full pt-2 overflow-hidden rounded-lg h-96">
         <img
           src={coverGirl}
           alt="cover"
-          className="object-cover w-full rounded-lg h-96 opacity-30"
+          className="object-cover w-full rounded-lg h-96 opacity-80"
         />
-        {/* <button className="absolute p-4 transform -translate-x-1/2 -translate-y-1/2 rounded-full top-1/2 left-1/2 bg-tangerine">
-          <VideoIcon />
-        </button> */}
 
         <RoutineTimeIntensity time={"10"} intensity={"baja"} />
       </div>

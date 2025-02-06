@@ -45,7 +45,7 @@ const RoutineAccordion = ({ routine }) => {
             </div>
           </AccordionTrigger>
           {!isOpen && (
-            <span className="text-sm font-normal leading-5 text-center transition-all duration-200 text-tangerine/80 opacity-80">
+            <span className="pb-3 text-sm font-normal leading-5 text-center transition-all duration-200 text-tangerine/80 opacity-80">
               Ver ejercicios del bloque
             </span>
           )}

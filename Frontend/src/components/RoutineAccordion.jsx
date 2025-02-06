@@ -83,7 +83,7 @@ const RoutineAccordion = ({ routine }) => {
                       Ver video del ejercicio
                     </div>
                   </DialogTrigger>
-                  <DialogContent className="sm:max-w-[425px]">
+                  <DialogContent className="w-full  sm:max-w-[425px]">
                     <DialogHeader className="hidden">
                       <DialogTitle>{exercise.exercise_name}</DialogTitle>
                     </DialogHeader>
@@ -93,7 +93,7 @@ const RoutineAccordion = ({ routine }) => {
 
                       <iframe
                         src={exercise.exercise_url_video}
-                        className="absolute top-0 left-0 w-full h-full"
+                        className="absolute top-0 left-0 w-full h-full pb-20 mx-auto"
                         allow="autoplay; fullscreen; picture-in-picture"
                         title={`Video de ${exercise.exercise_name}`}
                       />

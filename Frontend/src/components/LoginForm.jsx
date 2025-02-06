@@ -12,12 +12,12 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
-import { Input } from "./ui/input";
+import { Input } from "@/components/ui/input";
 import PasswordInput from "@/components/ui/PasswordInput";
 import { Link, useNavigate } from "react-router";
 
 const loginSchema = z.object({
-  email: z.string().min(1, "Este campo es requerido"),
+  email: z.string().min(1, "Por favor, ingresa un correo electrónico válido."),
   password: z.string().min(1, "Este campo es requerido"),
 });
 
@@ -80,19 +80,24 @@ const LoginForm = () => {
               )}
             />
 
-            <PasswordInput
-              control={loginForm.control}
-              name="password"
-              label="Contraseña"
-              description="Crea una contraseña."
-              id="password"
-              className="text-base"
-            />
-             <Link to="/forgot-password">
-              <Button variant="tertiary" className="justify-end p-0 ">
-                Olvidé mi contraseña
-              </Button>
-            </Link>
+              <PasswordInput
+                control={loginForm.control}
+                name="password"
+                label="Contraseña"
+                description="Crea una contraseña."
+                id="password"
+                className="text-base"
+              />
+              
+              <div className="flex justify-end">
+                <Link
+                  to="/forgot-password"
+                  className="text-sm font-normal leading-5 text-tangerine/80"
+                  tabIndex={-1}
+                >
+                  Olvidé mi contraseña
+                </Link>
+              </div>
           </div>
 
           <div>

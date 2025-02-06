@@ -100,7 +100,6 @@
   mix-blend-mode: screen;
 }
 
-<<<<<<< HEAD
 .custom-card{
   width: 100%;
   margin: auto;
@@ -182,7 +181,7 @@
 .card-footer button:hover{
   color: #fff;
 }
-=======
+
 .shadow-btn {
   box-shadow: 0px 4px 4px 0px #ffffff26;
 }
@@ -194,4 +193,3 @@
 .routine-shadow {
   box-shadow: 0px 4px 4px 0px #fff9f61a;
 }
->>>>>>> aab023c7c0768ed15ab169e3870b1cf7630ba84e

@@ -4,19 +4,17 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useIsMutating } from "@tanstack/react-query";
 import { useLogin } from "@/hooks/useUserAuth";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "./ui/input";
 import PasswordInput from "@/components/ui/PasswordInput";
-import { logo, arrowBack } from "@/assets";
-import { ForgotPassword } from "./Login/ForgotPassword";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 const loginSchema = z.object({
   email: z.string().min(1, "Este campo es requerido"),
@@ -39,7 +37,7 @@ const LoginForm = () => {
   const navigate = useNavigate();
 
   const goToRegister = () => {
-    navigate('/register');
+    navigate("/register");
   };
 
   const handleSubmit = (data) => {
@@ -47,18 +45,18 @@ const LoginForm = () => {
   };
 
   return (
-    <Card className="w-full max-w-md border-0 border-none shadow-none custom-card">
-      <CardHeader className="p[75px]">
-      <img className="arrow-back w-[30px] mt-[20px] cursor-pointer" src={arrowBack} alt="logo de momentum" />
-      <img className="logo-momentum" src={logo} alt="logo de momentum" />
-        <CardTitle>
-          <span className="title-card">Iniciar Sesión</span>
-          <div className="subtitle-card">Acceder con tu cuenta y sigue entrenando</div>
-        </CardTitle>
-      </CardHeader>
-      <CardContent className="space-y-2 pt-[75px]">
-        <Form {...loginForm}>
-          <form onSubmit={loginForm.handleSubmit(handleSubmit)} className="space-y-4">
+    <>
+      <div className="space-y-2">
+        <h1>Iniciar Sesión</h1>
+        <p className="text-cream/80">Accede con tu cuenta y sigue entrenando</p>
+      </div>
+
+      <Form {...loginForm}>
+        <form
+          onSubmit={loginForm.handleSubmit(handleSubmit)}
+          className="flex flex-col pt-5 space-y-[50%]"
+        >
+          <div className="flex flex-col gap-8">
             <FormField
               control={loginForm.control}
               name="email"
@@ -66,15 +64,18 @@ const LoginForm = () => {
                 <FormItem>
                   <FormControl>
                     <Input
-                      type="email"
                       id="email"
-                      placeholder="correo@ejemplo.com"
                       {...field}
                       autoComplete="email"
+                      placeholder="ejemplo@gmail.com"
+                      type="email"
+                      className="text-base"
                     />
                   </FormControl>
-                    <span className="text-sm text-cream/80">Ingresa tu correo electrónico</span>
                   <FormMessage />
+                  <FormDescription className="text-sm text-cream/80">
+                    Ingresa tu correo electrónico.
+                  </FormDescription>
                 </FormItem>
               )}
             />
@@ -82,25 +83,32 @@ const LoginForm = () => {
             <PasswordInput
               control={loginForm.control}
               name="password"
-              htmlFor="loginPassword"
               label="Contraseña"
-              span="*"
-              id="loginPassword"
-              description={'Ingresa tu contrasena'}
+              description="Crea una contraseña."
+              id="password"
+              className="text-base"
             />
-            <ForgotPassword />
-            <div className="card-footer">
-                <div className="flex items-center justify-center">
-                  <Button type="submit" className="w-full bg-transparent btn-login" disabled={isMutating > 0}>
-                    {isMutating > 0 ? "Ingresando..." : "Entrar y entrenar"}
-                  </Button>
-                </div>
-                <span className="text-white text-center block p-[3px]">No tienes cuenta? <strong onClick={goToRegister} className=" cursor-pointer">Registrate aquí</strong></span>
-            </div>
-          </form>
-        </Form>
-      </CardContent>
-    </Card>
+             <Link to="/forgot-password">
+              <Button variant="tertiary" className="justify-end p-0 ">
+                Olvidé mi contraseña
+              </Button>
+            </Link>
+          </div>
+
+          <div>
+            <Button type="submit" variant="outline" className="w-full" disabled={isMutating > 0}>
+              {isMutating > 0 ? "Ingresando..." : "ENTRAR Y ENTRENAR"}
+            </Button>
+            <span className="block pt-4 text-center text-white">
+              No tienes cuenta?{" "}
+              <strong onClick={goToRegister} className="cursor-pointer ">
+                Registrate aquí
+              </strong>
+            </span>
+          </div>
+        </form>
+      </Form>
+    </>
   );
 };
 

@@ -16,7 +16,7 @@ const HeroCarousel = () => {
       setCurrent(api.selectedScrollSnap());
     });
   }, [api]);
-
+  
   return (
     <Carousel setApi={setApi} className="relative w-full max-w-md mx-auto">
       <CarouselContent>

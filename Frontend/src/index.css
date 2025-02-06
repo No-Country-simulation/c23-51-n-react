@@ -99,3 +99,85 @@
   opacity: 0.5;
   mix-blend-mode: screen;
 }
+
+.custom-card{
+  width: 100%;
+  margin: auto;
+  min-height: calc(100vh - 50px);
+  background-color: #0d0d0d;
+  border: 2px solid #FA7E25;
+  position: relative;
+}
+
+.custom-card .logo-momentum{
+  width: 60px;
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  margin-bottom: 35px;
+  padding-top: 20px;
+  position: absolute;
+  left: calc(50% - 24px);
+}
+
+.custom-card .title-card{
+  color: #FFF9F6;
+  font-size: 24px;
+  padding-top: 60px;
+  display: block;
+}
+
+.custom-card .subtitle-card{
+  color: #FFF9F6CC;
+  margin-top: 7px;
+  font-size: 16px;
+  font-weight: normal;
+}
+
+.custom-card .btn-login{
+  border: 2px solid #FA7E25;
+  color: #FA7E25;
+  margin-top: 20px;
+}
+
+.custom-card .card-text_button{
+  font-size: 12px;
+  color: #FFF9F699;
+}
+
+.custom-card .go-to-forgot-pass{
+  text-align: end;
+  color: #FA7E25;
+  font-weight: normal;
+  display: flex;
+  justify-content: end;
+  margin-top: 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.custom-card input{
+  color: #fff;
+}
+
+.card-footer{
+  position: absolute;
+  bottom: 50px;
+  display: flex;
+  justify-content: center;
+  width: 90%;
+  left: 5%;
+  flex-direction: column;
+  margin: auto;
+  text-align: center;
+}
+
+@media (max-width: 414px) {
+  .card-footer{
+    left: 15px;
+  }
+}
+
+.card-footer button:hover{
+  color: #fff;
+}

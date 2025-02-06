@@ -8,6 +8,13 @@ import {
 } from "@/components/ui/accordion";
 import { Separator } from "@/components/ui/separator";
 import { useState } from "react";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 const RoutineAccordion = ({ routine }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -69,17 +76,30 @@ const RoutineAccordion = ({ routine }) => {
           {routine?.exercises?.map((exercise) => (
             <div key={exercise.exercise_id} className="mb-2">
               {exercise.exercise_url_video && (
-                <div className="flex items-center justify-center gap-1 py-4">
-                  <VideoIcon color="#FA7E25" />
-                  <a
-                    href={exercise.exercise_url_video}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-sm font-normal leading-5 text-tangerine/80 opacity-80"
-                  >
-                    Ver video del ejercicio
-                  </a>
-                </div>
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <div className="flex items-center justify-center gap-1 py-4">
+                      <VideoIcon color="#FA7E25" />
+                      Ver video del ejercicio
+                    </div>
+                  </DialogTrigger>
+                  <DialogContent className="sm:max-w-[425px]">
+                    <DialogHeader className="hidden">
+                      <DialogTitle>{exercise.exercise_name}</DialogTitle>
+                    </DialogHeader>
+
+                    <div className="relative w-full aspect-[1/2]">
+                      <span className="absolute pt-12">{exercise.exercise_name}</span>
+
+                      <iframe
+                        src={exercise.exercise_url_video}
+                        className="absolute top-0 left-0 w-full h-full"
+                        allow="autoplay; fullscreen; picture-in-picture"
+                        title={`Video de ${exercise.exercise_name}`}
+                      />
+                    </div>
+                  </DialogContent>
+                </Dialog>
               )}
               <p className="pb-4 font-bold">{exercise.exercise_name}</p>
               <div className="space-y-4">

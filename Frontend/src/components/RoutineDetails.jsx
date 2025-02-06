@@ -44,7 +44,7 @@ const RoutineDetails = () => {
           className="object-cover w-full rounded-lg h-96 opacity-80"
         />
 
-        <RoutineTimeIntensity time={"10"} intensity={"baja"} />
+        <RoutineTimeIntensity time={"35"} intensity={"baja"} />
       </div>
       <span className="pt-4 text-sm text-cream/80">INICIAL</span>
       <h1 className="text-2xl font-bold">ACTIVA TU ENERGÍA</h1>

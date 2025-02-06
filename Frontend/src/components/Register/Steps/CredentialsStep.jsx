@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import PropTypes from "prop-types";
 import Register from "../Register";
 import { Button } from "@/components/ui/button";
@@ -14,6 +15,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import PasswordInput from "@/components/ui/PasswordInput";
+import { useIsMutating } from "@tanstack/react-query";
 
 const accountSchema = z
   .object({
@@ -21,8 +23,7 @@ const accountSchema = z
     password: z
       .string()
       .min(8, {
-        message:
-          "La contraseña debe tener al menos 8 caracteres, 1 letra mayúscula y 1 número",
+        message: "La contraseña debe tener al menos 8 caracteres, 1 letra mayúscula y 1 número",
       })
       .max(50, { message: "La contraseña no debe exceder los 50 caracteres" })
       .regex(/[A-Z]/, { message: "La contraseña debe contener al menos una letra mayúscula" })
@@ -34,7 +35,7 @@ const accountSchema = z
     path: ["confirmPassword"],
   });
 
-const CredentialsStep = ({ onNext, onBack, onHandleSubmit }) => {
+const CredentialsStep = ({ onNext, onBack, onHandleSubmit, isLoading, isError }) => {
   const form = useForm({
     resolver: zodResolver(accountSchema),
     defaultValues: {
@@ -45,9 +46,14 @@ const CredentialsStep = ({ onNext, onBack, onHandleSubmit }) => {
     mode: "onChange",
   });
 
-  const onSubmit = (data) => {
-    onNext(data);
-    onHandleSubmit();
+  const isMutating = useIsMutating();
+
+  const onSubmit = async (data) => {
+    try {
+      await onHandleSubmit(data);
+    } catch (error) {
+      console.error("Error en el registro:", error);
+    }
   };
 
   return (
@@ -101,6 +107,12 @@ const CredentialsStep = ({ onNext, onBack, onHandleSubmit }) => {
               className="text-base"
             />
 
+            {isError && (
+              <p className="text-xs font-normal leading-4 text-center text-destructive">
+                Hubo un error en el registro. Por favor, intenta de nuevo.
+              </p>
+            )}
+            
             <p className="text-[10px] text-cream/60 text-center leading-4 font-normal [&_span]:cursor-pointer [&_span]:underline [&_span]:underline-offset-2 px-8">
               Al continuar, indicas que haz leído y aceptas nuestros{" "}
               <span>Términos y Condiciones</span>, <span>Política de Privacidad</span> y{" "}
@@ -112,9 +124,9 @@ const CredentialsStep = ({ onNext, onBack, onHandleSubmit }) => {
             type="submit"
             variant="outline"
             className="w-full"
-            disabled={!form.formState.isValid || form.formState.isSubmitting}
+            disabled={!form.formState.isValid || isMutating > 0}
           >
-            Crear cuenta
+            {isMutating > 0 ? "Creando cuenta..." : "Crear cuenta"}
           </Button>
         </form>
       </Form>
@@ -123,9 +135,11 @@ const CredentialsStep = ({ onNext, onBack, onHandleSubmit }) => {
 };
 
 CredentialsStep.propTypes = {
-  onNext: PropTypes.func.isRequired,
+  onNext: PropTypes.func,
   onBack: PropTypes.func.isRequired,
-  onHandleSubmit: PropTypes.func,
+  onHandleSubmit: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool,
+  isError: PropTypes.bool,
 };
 
 export default CredentialsStep;

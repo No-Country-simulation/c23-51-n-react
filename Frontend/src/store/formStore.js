@@ -1,29 +1,22 @@
-import { create } from "zustand"
-import { persist, createJSONStorage } from "zustand/middleware"
+import { create } from "zustand";
+import { persist, createJSONStorage } from "zustand/middleware";
 
 const useFormStore = create(
   persist(
     (set) => ({
-      userData: {},
-      profileData: {},
-      setFormData: (data, step) => {
-        if (step === 5 || step === 7) {
-          set((state) => ({ userData: { ...state.userData, ...data } }))
-        } else {
-          set((state) => ({ profileData: { ...state.profileData, ...data } }))
-        }
+      formData: {},
+      setFormData: (data) => {
+        set((state) => ({ formData: { ...state.formData, ...data } }));
       },
       resetForm: () => {
-        set({ userData: {}, profileData: {} })
+        set({ formData: {} });
       },
     }),
     {
-      name: "form-storage", 
+      name: "form-storage",
       storage: createJSONStorage(() => localStorage),
     },
   ),
-)
+);
 
-export default useFormStore
-
-
+export default useFormStore;

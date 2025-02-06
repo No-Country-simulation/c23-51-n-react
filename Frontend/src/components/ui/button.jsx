@@ -12,17 +12,19 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "rounded-2xl bg-tangerine text-base font-bold leading-5 text-white shadow hover:bg-tangerine/90 uppercase",
+          "rounded-2xl bg-tangerine text-base font-bold leading-5 text-white shadow hover:bg-[#D25F0C] uppercase shadow-btn",
         outline:
-          "rounded-lg border border-tangerine text-base font-bold bg-transparent shadow-sm hover:bg-tangerine/20 text-tangerine uppercase",
+          "rounded-2xl border border-tangerine text-base font-bold bg-transparent shadow-sm hover:bg-tangerine/20 text-tangerine uppercase",
         link: "text-cream text-base font-normal leading-5 underline-offset-8 hover:underline decoration-tangerine",
-        ghost: "",
+        tertiary: "text-tangerine/80 text-sm font-normal leading-5",
+        playBtn: "rounded-full bg-transparent shadow-btn [&_svg]:size-24 p-0",
       },
       size: {
         default: "h-12 px-4 py-3.5 w-full",
         sm: "h-8 rounded-md px-3 text-xs",
         lg: "h-10 rounded-md px-8",
-        icon: "h-9 w-9",
+        icon: "size-20",
+        link: "p-0",
       },
     },
     defaultVariants: {

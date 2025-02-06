@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import GenderStep from "./Steps/GenderStep";
 import AgeStep from "./Steps/AgeStep";
@@ -20,7 +20,7 @@ const MultiStepForm = () => {
   const { setFormData, resetForm } = useFormStore();
 
   const navigate = useNavigate();
-  const { register } = useRegister();
+  const { register, isLoading, isError, isSuccess } = useRegister();
 
   const handleNext = (data) => {
     setFormData(data, step);
@@ -30,17 +30,21 @@ const MultiStepForm = () => {
   const handleBack = () => {
     if (step === 1) {
       return navigate("/");
-    };
+    }
     setStep((prev) => prev - 1);
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (data) => {
+    setFormData(data);
     try {
-      await register(); 
-      setStep((prev) => prev + 1);
-      resetForm();
+      await register(data);
+      // Si el registro es exitoso, avanzamos al siguiente paso
+      if (isSuccess) {
+        setStep(8);
+      }
     } catch (error) {
       console.error("Error en el registro:", error);
+      // No avanzamos al siguiente paso en caso de error
     }
   };
 
@@ -52,6 +56,13 @@ const MultiStepForm = () => {
     navigate("/subscription");
     resetForm();
   };
+
+  // Efecto para manejar el avance después del registro exitoso
+  useEffect(() => {
+    if (isSuccess) {
+      setStep(8); // Avanzar al paso de carga
+    }
+  }, [isSuccess]);
 
   const renderStep = () => {
     switch (step) {
@@ -76,10 +87,16 @@ const MultiStepForm = () => {
         );
       case 7:
         return (
-          <CredentialsStep onNext={handleNext} onBack={handleBack} onHandleSubmit={handleSubmit} />
+          <CredentialsStep
+            onNext={handleNext}
+            onBack={handleBack}
+            onHandleSubmit={handleSubmit}
+            isLoading={isLoading}
+            isError={isError}
+          />
         );
       case 8:
-        return <LoadingStep onNext={handleComplete} />;
+        return <LoadingStep onNext={() => setStep(9)} />;
       case 9:
         return <FreeTrialGuideStep onNext={handleComplete} />;
       case 10:

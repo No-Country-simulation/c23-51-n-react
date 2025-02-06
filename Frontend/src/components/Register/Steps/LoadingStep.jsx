@@ -1,5 +1,5 @@
-import PropTypes from "prop-types";
 import { useState, useEffect, useRef } from "react";
+import PropTypes from "prop-types";
 import Register from "../Register";
 import { Button } from "@/components/ui/button";
 import { loader } from "@/assets";
@@ -7,30 +7,32 @@ import { loader } from "@/assets";
 const LoadingStep = ({ onNext }) => {
   const [percentage, setPercentage] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
-  const buttonRef = useRef(null);
+  const [showContinueButton, setShowContinueButton] = useState(false);
+  const intervalRef = useRef(null);
 
   useEffect(() => {
-    const interval = setInterval(() => {
+    intervalRef.current = setInterval(() => {
       setPercentage((prevPercentage) => {
         if (prevPercentage >= 100) {
-          clearInterval(interval);
-          setIsLoading(false);
+          clearInterval(intervalRef.current);
           return 100;
         }
-        return prevPercentage + 1;
+        const increment = Math.max(1, 10 - Math.floor(prevPercentage / 10));
+        return Math.min(100, prevPercentage + increment);
       });
-    }, 30);
+    }, 100);
 
-    return () => clearInterval(interval);
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
   }, []);
 
   useEffect(() => {
     if (percentage === 100) {
       const timer = setTimeout(() => {
-        if (buttonRef.current) {
-          buttonRef.current.click();
-        }
-      }, 5000);
+        setIsLoading(false);
+        setShowContinueButton(true);
+      }, 1000);
 
       return () => clearTimeout(timer);
     }
@@ -50,17 +52,25 @@ const LoadingStep = ({ onNext }) => {
           </p>
         </div>
         <div className="flex justify-center">
-          <img src={loader} alt="Loader icon" className={!isLoading ? "animate-none" : "duration-1500 animate-spin" } />
+          <img
+            src={loader}
+            alt="Loader icon"
+            className={`transition-all duration-500 ${isLoading ? "animate-spin" : "animate-pulse"}`}
+          />
         </div>
         <div className="flex flex-col items-center justify-center text-cream/80">
           <span className="mb-2 text-2xl font-bold">{percentage}%</span>
-          <p className="text-sm ">
-            ¡Preparando el mejor plan <br /> para que logres tus objetivos!
-          </p>
+          {percentage < 100 ? (
+            <p className="text-sm ">
+              ¡Preparando el mejor plan <br /> para que logres tus objetivos!
+            </p>
+          ) : (
+            <p className="text-sm ">¡Tu plan está listo!</p>
+          )}
         </div>
       </div>
-      {!isLoading && (
-        <Button ref={buttonRef} type="button" variant="outline" onClick={handleContinue}>
+      {showContinueButton && (
+        <Button type="button" variant="outline" onClick={handleContinue}>
           Continuar
         </Button>
       )}
